@@ -1,0 +1,130 @@
+{
+	"mangas": {
+		"manganato": [
+			{
+				"name": "The scholar's reincarnation",
+				"site": "https://chapmanganato.com/manga-vv973156",
+				"last_read_chapter": 198
+			},
+			{
+				"name": "Skeleton couldn't protect the dungeon",
+				"site": "https://chapmanganato.com/manga-bu979277",
+				"last_read_chapter": 212
+			},
+			{
+				"name": "The dungeon master",
+				"site": "https://chapmanganato.com/manga-ds980601",
+				"last_read_chapter": 143
+			},
+			{
+				"name": "The great mage returnas after 4000 years",
+				"site": "https://chapmanganato.com/manga-hu985229",
+				"last_read_chapter": 147
+			},
+			{
+				"name": "The Executed Sage Is Reincarnated As A Lich And Starts An All-Out War",
+				"site": "https://chapmanganato.com/manga-if986340",
+				"last_read_chapter": 26
+			},
+			{
+				"name": "Reincarnated as an aristocrat with an appraisal skill",
+				"site": "https://chapmanganato.com/manga-iq985899",
+				"last_read_chapter": 80
+			},
+			{
+				"name": "A returner's magic should be special",
+				"site": "https://chapmanganato.com/manga-ci980191",
+				"last_read_chapter": 208
+			},
+			{
+				"name": "Ranked who lives a second time",
+				"site": "https://chapmanganato.com/manga-ec981811",
+				"last_read_chapter": 138
+			},
+			{
+				"name": "The strongest Florist",
+				"site": "https://chapmanganato.com/manga-hp985172",
+				"last_read_chapter": 130
+			},
+			{
+				"name": "Story of a low ranked soldier becoming a monarch",
+				"site": "https://chapmanganato.com/manga-mg989389",
+				"last_read_chapter": 93
+			},
+			{
+				"name": "Seoul station's necromancer",
+				"site": "https://chapmanganato.com/manga-mf989840",
+				"last_read_chapter": 67
+			},
+			{
+				"name": "The only necromancer",
+				"site": "https://chapmanganato.com/manga-ml989694",
+				"last_read_chapter": 68
+			},
+			{
+				"name": "The Exiled Reincarnated Heavy Knight Is Unrivaled In Game Knowledge",
+				"site": "https://chapmanganato.com/manga-nh990916",
+				"last_read_chapter": 30
+			},
+			{
+				"name": "The Duchess has a deathwish",
+				"site": "https://chapmanganato.com/manga-oh992190",
+				"last_read_chapter": 34
+			},
+			{
+				"name": "The hero returns",
+				"site": "https://chapmanganato.com/manga-ni990665",
+				"last_read_chapter": 47.5
+			},
+			{
+				"name": "The struggle of being reincarnated as the marquess's daughter",
+				"site": "https://manganato.com/manga-le988539",
+				"last_read_chapter": 19
+			},
+			{
+				"name": "Academy's undercover professor",
+				"site": "https://chapmanganato.com/manga-nk991067",
+				"last_read_chapter": 33
+			}
+		],
+		"asura": [
+			{
+				"name": "Standard of Reincarnation",
+				"site": "https://asura.gg/manga/standard-of-reincarnation/",
+				"last_read_chapter": 35
+			},
+			{
+				"name": "Max level hero has returned!",
+				"site": "https://asura.gg/manga/the-max-level-hero-has-returned/",
+				"last_read_chapter": 109
+			},
+			{
+				"name": "My School Life Pretending To Be a Worthless Person",
+				"site": "https://asura.gg/manga/my-school-life-pretending-to-be-a-worthless-person/",
+				"last_read_chapter": 34
+			},
+			{
+				"name": "The Dark Magician Transmigrates After 66666 Years",
+				"site": "https://asura.gg/manga/the-dark-magician-transmigrates-after-66666-years/",
+				"last_read_chapter": 64
+			},
+			{
+				"name": "Return of the SSS-class Ranker",
+				"site": "https://asura.gg/manga/return-of-the-sss-class-ranker/",
+				"last_read_chapter": 34
+			},
+			{
+				"name": "Damn reincarnation",
+				"site": "https://asura.gg/manga/damn-reincarnation/",
+				"last_read_chapter": 42
+			}
+		]
+	},
+	"light_novel": {
+		"professor": {
+			"site": "https://www.wuxiax.com/novel/academys-undercover-professor.html",
+			"name": "Academy's Undercover Professor Light Novel",
+			"last_read_chapter": 189
+		}
+	}
+}
