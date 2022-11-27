@@ -1,9 +1,12 @@
+use super::CheckError;
+use crate::common_fn::get_site_as_string;
+use crate::data::Site;
 use regex::Regex;
-use crate::data::{Site};
-use crate::common_fn::{get_site_as_string};
 
-pub async fn check_manga_site(site: &Site) -> Result<f32, reqwest::Error> {
-    let text = get_site_as_string(&site.url).await?;
+pub async fn check(site: &Site) -> Result<f32, CheckError> {
+    let text = get_site_as_string(&site.url)
+        .await
+        .map_err(|err| CheckError::Request((err)))?;
 
     let text: Vec<&str> = text
         .lines()
@@ -21,8 +24,8 @@ pub async fn check_manga_site(site: &Site) -> Result<f32, reqwest::Error> {
         .replace_all(text[1], "")
         .to_string()
         .parse::<f32>()
-        .unwrap();
+        .map_err(|err| CheckError::Parse(format!("Couldn't parse float manganato {err} {}", site.name)))?;
 
     println!("{:#?}", final_text);
-	Ok(final_text)
+    Ok(final_text)
 }

@@ -1,24 +1,24 @@
+use futures::{stream, StreamExt, TryStreamExt};
+
 mod common_fn;
 mod data;
 mod manga_handlers;
 
-use data::{get_data, Data, Site};
-use manga_handlers::manganato::check_manga_site;
+use data::{get_data};
+use manga_handlers::manganato::check;
 
 #[tokio::main]
 async fn main() {
     let data = get_data();
 
     let manganato_sites = data.mangas.get("manganato").unwrap();
-    //let asura_sites = data.mangas.get("asura").unwrap();
+    let asura_sites = data.mangas.get("asura").unwrap();
 
-    let mut futures = Vec::with_capacity(manganato_sites.len());
+    let stream = stream::iter(manganato_sites.iter().map(check));
 
-    for site in manganato_sites {
-        futures.push(check_manga_site(&site));
-    }
+    let result: Result<Vec<f32>, _> = stream.buffer_unordered(20).try_collect().await;
 
-    let result = futures::future::try_join_all(futures).await;
+    // let result = futures::future::try_join_all(futures).await;
 
     println!("{:#?}", result.unwrap());
 }
