@@ -26,6 +26,6 @@ pub async fn check(entry: &Entry) -> Result<(String, f32), CheckError> {
         .parse::<f32>()
         .map_err(|err| CheckError::Parse(format!("Couldn't parse float manganato {err} {}", entry.name)))?;
 
-    println!("{:#?}", final_text);
+    
     Ok((entry.url.clone(), final_text))
 }
