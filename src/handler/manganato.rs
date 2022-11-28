@@ -20,12 +20,12 @@ pub async fn check(entry: &Entry) -> Result<(String, f32), CheckError> {
 
     let re = Regex::new(r"[^\d.]").unwrap();
 
-    let final_text = re
+    let chapter = re
         .replace_all(text[1], "")
         .to_string()
         .parse::<f32>()
         .map_err(|err| CheckError::Parse(format!("Couldn't parse float manganato {err} {}", entry.name)))?;
 
     
-    Ok((entry.url.clone(), final_text))
+    Ok((entry.url.clone(), chapter))
 }
