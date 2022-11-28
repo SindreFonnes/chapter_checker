@@ -23,10 +23,7 @@ pub async fn check(entry: &Entry) -> Result<(String, f32), CheckError> {
     let text = re
         .captures(text)
         .and_then(|captures| captures.get(1))
-        .map(|m| {
-            println!("{}", m.as_str());
-            m.as_str()
-        })
+        .map(|m| m.as_str())
         .ok_or(CheckError::Parse(format!(
             "Couldn't find that chapter string professor {}",
             entry.name

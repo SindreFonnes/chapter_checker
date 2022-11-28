@@ -2,12 +2,20 @@ pub mod asura;
 pub mod manganato;
 pub mod professor;
 
+use core::fmt;
+
 use crate::data::{Entry, Site};
 
 #[derive(Debug)]
 pub enum CheckError {
     Request(reqwest::Error),
     Parse(String),
+}
+
+impl fmt::Display for CheckError {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "Checkerror")
+    }
 }
 
 pub async fn handle(entry: &Entry) -> Result<(String, f32), CheckError> {
