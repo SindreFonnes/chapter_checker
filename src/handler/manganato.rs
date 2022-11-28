@@ -3,7 +3,7 @@ use crate::common_fn::get_site_as_string;
 use crate::data::Entry;
 use regex::Regex;
 
-pub async fn check(entry: &Entry) -> Result<(String, f32), CheckError> {
+pub async fn check(entry: &Entry) -> Result<(Entry, f32), CheckError> {
     let text = get_site_as_string(&entry.url)
         .await
         .map_err(|err| CheckError::Request(err))?;
@@ -27,5 +27,5 @@ pub async fn check(entry: &Entry) -> Result<(String, f32), CheckError> {
         .map_err(|err| CheckError::Parse(format!("Couldn't parse float manganato {err} {}", entry.name)))?;
 
     
-    Ok((entry.url.clone(), chapter))
+    Ok((entry.clone(), chapter))
 }

@@ -18,7 +18,7 @@ impl fmt::Display for CheckError {
     }
 }
 
-pub async fn handle(entry: &Entry) -> Result<(String, f32), CheckError> {
+pub async fn handle(entry: &Entry) -> Result<(Entry, f32), CheckError> {
     match entry.site {
         Site::Manganato => manganato::check(entry).await,
         Site::Asura => asura::check(entry).await,
