@@ -1,6 +1,6 @@
 use serde::{Deserialize, Serialize};
 use serde_json::from_str;
-use std::fs::{create_dir_all, read_to_string, write};
+use std::fs::{create_dir_all, read_to_string, write, remove_file};
 use std::io::Write;
 use std::collections::HashMap;
 
@@ -21,7 +21,7 @@ pub struct Entry {
     pub url: String,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Clone, Deserialize, Debug)]
 pub struct CurrentChapterState {
     pub last_chapter_read: f32,
     pub last_updated: String,
@@ -69,10 +69,14 @@ pub fn get_latest_read_chapters() -> HashMap<String, CurrentChapterState> {
     entries
 }
 
-pub fn update_current_state(new_state: HashMap<String, CurrentChapterState>) {
+pub fn update_current_state(new_state: &HashMap<String, CurrentChapterState>) {
     write(
         get_current_state_full_path(),
         serde_json::to_string_pretty(&new_state).unwrap(),
     )
     .unwrap();
+}
+
+pub fn wipe_stored_data () {
+    remove_file(get_current_state_full_path()).unwrap();
 }
