@@ -19,6 +19,7 @@ pub struct Entry {
     pub site: Site,
     pub name: String,
     pub url: String,
+    pub a_url: String,
 }
 
 #[derive(Serialize, Clone, Deserialize, Debug)]
