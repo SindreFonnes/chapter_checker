@@ -8,9 +8,11 @@ mod handler;
 use chrono::Utc;
 use common_fn::announce_new_chapter;
 use data::{
-    get_entries, get_latest_read_chapters, update_current_state, CurrentChapterState, Entry, wipe_stored_data
+    get_entries, get_latest_read_chapters, update_read_chapter_state, CurrentChapterState, Entry, wipe_stored_read_chapter_data
 };
 use handler::handle;
+
+use crate::data::wipe_site_state_file;
 
 #[tokio::main]
 async fn main() {
@@ -61,11 +63,15 @@ async fn main() {
     for arg in args {
         if arg == "write" {
             println!("Updating readlist...");
-            update_current_state(&state);
+            update_read_chapter_state(&state);
         }
         if arg == "wipe" {
             println!("Wiping app-data...");
-            wipe_stored_data();
+            wipe_stored_read_chapter_data();
+        }
+        if arg == "wipeSite" {
+            println!("Wiping site url state...");
+            wipe_site_state_file();
         }
     }
 }

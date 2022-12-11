@@ -1,7 +1,61 @@
+use reqwest::Response;
+
 use crate::data::Entry;
 
+async fn get_site_respone(site: &str) -> Result<Response, reqwest::Error> {
+    let response = match match reqwest::get(site).await {
+        Ok(resp) => resp,
+        Err(err) => {
+            println!("Error for site: {}", site);
+            println!("{:?}", err);
+            return Err(err);
+        }
+    }
+    .error_for_status()
+    {
+        Ok(resp) => resp,
+        Err(err) => {
+            println!("Error for site: {}", site);
+            println!("{:?}", err);
+            return Err(err);
+        }
+    };
+    Ok(response)
+}
+
 pub async fn get_site_as_string(site: &str) -> Result<String, reqwest::Error> {
-    let response = reqwest::get(site).await?.error_for_status()?;
+    let response = match get_site_respone(site).await {
+        Ok(resp) => resp,
+        Err(err) => return Err(err),
+    };
+
+    if response.status().as_u16() == 302 {
+        println!("{} changed url", site);
+
+        let headers = response.headers();
+        let new_url = headers
+            .get("location")
+            .expect(format!("Failed to unwrap new url to {}", site).as_str());
+        println!("{} changed url to {:?}", site, &new_url);
+
+        let response = match get_site_respone(
+            &new_url.to_str().expect(
+                format!(
+                    "Failed to parse new_url to string for {}, {:?}",
+                    site, new_url
+                )
+                .as_str(),
+            ),
+        )
+        .await
+        {
+            Ok(resp) => resp,
+            Err(err) => return Err(err),
+        };
+
+        return response.text().await;
+    }
+
     response.text().await
 }
 
