@@ -1,6 +1,7 @@
 pub mod asura;
 pub mod manganato;
 pub mod professor;
+pub mod flamescans;
 
 use core::fmt;
 
@@ -23,5 +24,6 @@ pub async fn handle(entry: &Entry) -> Result<(Entry, f32), CheckError> {
         Site::Manganato => manganato::check(entry).await,
         Site::Asura => asura::check(entry).await,
         Site::Professor => professor::check(entry).await,
+        Site::Flamescans => flamescans::check(entry).await,
     }
 }

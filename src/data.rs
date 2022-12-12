@@ -10,6 +10,7 @@ pub enum Site {
     Manganato,
     Asura,
     Professor,
+    Flamescans,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -82,11 +83,30 @@ pub fn get_current_site_state() -> HashMap<String, Entry> {
 
     let file = read_to_string(get_current_site_state_full_path())
         .expect("Failed to read from current_site_state file");
-    let state = from_str(&file).expect("Failed to parse current_site_state file");
+    let state: HashMap<String, Entry> =
+        from_str(&file).expect("Failed to parse current_site_state file");
+
+    let state_keys = state.keys();
+    let init_entries = get_init_entries();
+
+    if state_keys.len() < init_entries.len() {
+        let mut next_state: HashMap<String, Entry> = state.clone();
+
+        for entry in init_entries {
+            if !next_state.contains_key(&entry.name) {
+                next_state.insert(entry.name.clone(), entry);
+            }
+        }
+
+        update_site_state(&next_state);
+
+        return next_state;
+    }
+
     state
 }
 
-pub fn update_site_state(new_state: HashMap<String, Entry>) {
+pub fn update_site_state(new_state: &HashMap<String, Entry>) {
     write(
         get_current_site_state_full_path(),
         serde_json::to_string_pretty(&new_state).expect("Failed to stringify current_site_state"),

@@ -1,6 +1,22 @@
 use reqwest::Response;
 
 use crate::data::Entry;
+use crate::handler::CheckError;
+use regex::Regex;
+
+pub fn get_chapter_numbers_from_string(input: &str) -> Result<&str, CheckError> {
+    let re = Regex::new(r"Chapter ([0-9,.]*)").unwrap();
+
+    let text = re
+        .captures(input)
+        .and_then(|captures| captures.get(1))
+        .map(|m| m.as_str())
+        .ok_or(CheckError::Parse(
+            "Couldn't find the chapter string".to_string(),
+        ))?;
+
+    Ok(text)
+}
 
 async fn get_site_respone(site: &str) -> Result<Response, reqwest::Error> {
     let response = match match reqwest::get(site).await {
