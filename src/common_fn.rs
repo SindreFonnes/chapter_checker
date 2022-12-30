@@ -1,7 +1,8 @@
-use reqwest::Response;
+use reqwest::{RequestBuilder, Response};
 
 use crate::data::Entry;
 use crate::handler::CheckError;
+use rand::distributions::{Distribution, Uniform};
 use regex::Regex;
 
 pub fn get_chapter_numbers_from_string(input: &str) -> Result<&str, CheckError> {
@@ -18,8 +19,67 @@ pub fn get_chapter_numbers_from_string(input: &str) -> Result<&str, CheckError> 
     Ok(text)
 }
 
+const USER_AGENT_LIST: [&str; 3] = [
+    "Mozilla/5.0 (iPad; CPU OS 12_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.83 Safari/537.36",
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.51 Safari/537.36"
+];
+
+fn get_user_agent() -> &'static str {
+    let mut rng = rand::thread_rng();
+    let range = Uniform::from(0..3);
+    let random_index = range.sample(&mut rng);
+    println!("{}", random_index);
+    USER_AGENT_LIST[random_index]
+}
+
+//use reqwest::{
+//    header::{ACCEPT, CACHE_CONTROL, CONNECTION, USER_AGENT},
+//    RequestBuilder, Response,
+//};
+//.header(USER_AGENT, get_user_agent())
+//.header(CONNECTION, "keep-alive")
+//.header(CACHE_CONTROL, "max-age=0")
+//.header(
+//    "sec-ch-ua",
+//    "\" Not A;Brand\";v=\"99\", \"Chromium\";v=\"99\", \"Google Chrome\";v=\"99\"",
+//)
+//.header("sec-ch-ua-mobile", "?0")
+//.header("sec-ch-ua-platform", "macOS")
+//.header("Upgrade-Insecure-Requests", "1")
+//.header(ACCEPT, "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9")
+//.header("Sec-Fetch-Site", "none")
+//.header("Sec-Fetch-Mode", "navigate")
+//.header("Sec-Fetch-User", "?1")
+//.header("Sec-Fetch-Dest", "document")
+//.header("Accept-Language", "en-GB,en-US;q=0.9,en;q=0.8")
+//.header("Accept-Encoding", "gzip, deflate, br")
+
+fn add_client_headers(request_builder: RequestBuilder) -> RequestBuilder {
+    request_builder
+        .header(
+            "User-Agent",
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv,98.0) Gecko/20100101 Firefox/98.0",
+        )
+        .header(
+            "Accept",
+            "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
+        )
+        .header("Accept-Language", "en-US,en;q=0.5")
+        .header("Connection", "keep-alive")
+        .header("Upgrade-Insecure-Requests", "1")
+        .header("Sec-Fetch-Dest", "document")
+        .header("Sec-Fetch-Mode", "navigate")
+        .header("Sec-Fetch-Site", "none")
+        .header("Sec-Fetch-User", "?1")
+        .header("Cache-Control", "max-age=0")
+    //.header("Accept-Encoding", "gzip, deflate")
+}
+
 async fn get_site_respone(site: &str) -> Result<Response, reqwest::Error> {
-    let response = match match reqwest::get(site).await {
+    let client = reqwest::Client::new();
+
+    let response = match match add_client_headers(client.get(site)).send().await {
         Ok(resp) => resp,
         Err(err) => {
             println!("Error for site: {}", site);

@@ -24,8 +24,12 @@ pub async fn check(entry: &Entry) -> Result<(Entry, f32), CheckError> {
         .replace_all(text[1], "")
         .to_string()
         .parse::<f32>()
-        .map_err(|err| CheckError::Parse(format!("Couldn't parse float manganato {err} {}", entry.name)))?;
+        .map_err(|err| {
+            CheckError::Parse(format!(
+                "Couldn't parse float manganato {err} {}",
+                entry.name
+            ))
+        })?;
 
-    
     Ok((entry.clone(), chapter))
 }
