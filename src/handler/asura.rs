@@ -1,5 +1,5 @@
 use super::CheckError;
-use crate::common_fn::{get_site_as_string, get_chapter_numbers_from_string};
+use crate::common_fn::{get_chapter_numbers_from_string, get_site_as_string, SEPERATOR};
 use crate::data::Entry;
 
 pub async fn check(entry: &Entry) -> Result<(Entry, f32), CheckError> {
@@ -15,9 +15,17 @@ pub async fn check(entry: &Entry) -> Result<(Entry, f32), CheckError> {
 
     let text = get_chapter_numbers_from_string(text)?;
 
-    let chapter = text
-        .parse::<f32>()
-        .unwrap();
+    let chapter = match text.parse::<f32>() {
+        Ok(float) => float,
+        Err(e) => {
+            println!("{SEPERATOR}");
+            println!("Could not find / parse chapters for:");
+            println!("{}", entry.name);
+            println!("{}", entry.url);
+            println!("{SEPERATOR}");
+            return Err(CheckError::FloatErr(e));
+        }
+    };
 
     Ok((entry.clone(), chapter))
 }

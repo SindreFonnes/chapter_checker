@@ -135,7 +135,7 @@ pub async fn get_site_as_string(site: &str) -> Result<String, reqwest::Error> {
     response.text().await
 }
 
-const SEPERATOR: &str = "----------------";
+pub const SEPERATOR: &str = "----------------";
 
 pub fn announce_new_chapter(
     entry: &Entry,

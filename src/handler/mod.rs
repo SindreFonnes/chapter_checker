@@ -4,6 +4,7 @@ pub mod professor;
 pub mod flamescans;
 
 use core::fmt;
+use std::num::ParseFloatError;
 
 use crate::data::{Entry, Site};
 
@@ -11,6 +12,7 @@ use crate::data::{Entry, Site};
 pub enum CheckError {
     Request(reqwest::Error),
     Parse(String),
+    FloatErr(ParseFloatError)
 }
 
 impl fmt::Display for CheckError {
