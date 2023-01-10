@@ -8,8 +8,6 @@ pub fn check(text: String, url: String) -> Result<f32, CheckError> {
 
     let text: Vec<_> = text[1].split("</a>").collect();
 
-	println!("{}", text[0]);
-
 	let text: Vec<_> = text[0].split("class=\"box\">").collect();
 
     let text = text[1];
