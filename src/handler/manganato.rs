@@ -1,13 +1,7 @@
 use super::CheckError;
-use crate::common_fn::get_site_as_string;
-use crate::data::Entry;
 use regex::Regex;
 
-pub async fn check(entry: &Entry) -> Result<(Entry, f32), CheckError> {
-    let text = get_site_as_string(&entry.url)
-        .await
-        .map_err(|err| CheckError::Request(err))?;
-
+pub fn check(text: String, url: String) -> Result<f32, CheckError> {
     let text: Vec<&str> = text
         .lines()
         .filter(|segment| segment.contains("chapter"))
@@ -27,9 +21,9 @@ pub async fn check(entry: &Entry) -> Result<(Entry, f32), CheckError> {
         .map_err(|err| {
             CheckError::Parse(format!(
                 "Couldn't parse float manganato {err} {}",
-                entry.name
+                url
             ))
         })?;
 
-    Ok((entry.clone(), chapter))
+    Ok(chapter)
 }

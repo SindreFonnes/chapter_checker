@@ -145,9 +145,8 @@ pub fn announce_new_chapter(
 ) {
     println!("{SEPERATOR}");
     println!("Name : {}", entry.name);
-    println!("Site : {:?}", entry.site);
     println!("Type : {}", entry.kind);
-    println!("Url  : {}", entry.url);
+    println!("Urls : {:?}", entry.urls);
     if entry.a_url != "".to_owned() {
         println!("AUrl : {}", entry.a_url);
     }

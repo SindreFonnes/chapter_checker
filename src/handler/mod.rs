@@ -1,18 +1,24 @@
-pub mod asura;
-pub mod manganato;
-pub mod professor;
-pub mod flamescans;
+mod asura;
+mod flamescans;
+mod lnreader;
+mod manganato;
+mod wuxiax;
 
 use core::fmt;
 use std::num::ParseFloatError;
 
-use crate::data::{Entry, Site};
+use futures::StreamExt;
+
+use crate::{
+    common_fn::get_site_as_string,
+    data::{Entry, Site, SiteDomain},
+};
 
 #[derive(Debug)]
 pub enum CheckError {
     Request(reqwest::Error),
     Parse(String),
-    FloatErr(ParseFloatError)
+    FloatErr(ParseFloatError),
 }
 
 impl fmt::Display for CheckError {
@@ -21,11 +27,40 @@ impl fmt::Display for CheckError {
     }
 }
 
+async fn site_handler(site: &Site) -> Result<f32, CheckError> {
+    let site_text = get_site_as_string(&site.url)
+        .await
+        .map_err(|err| CheckError::Request(err))?;
+
+    let parsed_text = {
+        match site.domain {
+            SiteDomain::Manganato => manganato::check(site_text, site.url.clone()),
+            SiteDomain::Asura => asura::check(site_text, site.url.clone()),
+            SiteDomain::Wuxiax => wuxiax::check(site_text, site.url.clone()),
+            SiteDomain::Flamescans => flamescans::check(site_text, site.url.clone()),
+            SiteDomain::Lnreader => lnreader::check(site_text, site.url.clone()),
+        }
+    }?;
+
+    Ok(parsed_text)
+}
+
 pub async fn handle(entry: &Entry) -> Result<(Entry, f32), CheckError> {
-    match entry.site {
-        Site::Manganato => manganato::check(entry).await,
-        Site::Asura => asura::check(entry).await,
-        Site::Professor => professor::check(entry).await,
-        Site::Flamescans => flamescans::check(entry).await,
+    let mut highest_chapter_found: f32 = 0.0;
+
+    let fetched_entries: Vec<Result<f32, CheckError>> =
+        futures::stream::iter(entry.urls.iter().map(site_handler))
+            .buffer_unordered(1)
+            .collect()
+            .await;
+
+    for result in fetched_entries {
+        if let Ok(chapter) = result {
+            if highest_chapter_found < chapter {
+                highest_chapter_found = chapter;
+            }
+        }
     }
+
+    Ok((entry.clone(), highest_chapter_found))
 }

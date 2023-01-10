@@ -6,21 +6,27 @@ use std::io::Write;
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "SCREAMING_SNAKE_CASE")]
-pub enum Site {
+pub enum SiteDomain {
     Manganato,
     Asura,
-    Professor,
+    Wuxiax,
     Flamescans,
+    Lnreader,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct Site {
+    pub domain: SiteDomain,
+    pub url: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Entry {
     #[serde(rename = "type")]
     pub kind: String,
-    pub site: Site,
     pub name: String,
-    pub url: String,
     pub a_url: String,
+    pub urls: Vec<Site>,
 }
 
 #[derive(Serialize, Clone, Deserialize, Debug)]

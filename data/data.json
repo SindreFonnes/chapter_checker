@@ -1,184 +1,292 @@
 [
 	{
 		"type": "MANGA",
-		"site": "MANGANATO",
 		"name": "The scholar's reincarnation",
-		"url": "https://chapmanganato.com/manga-vv973156",
-		"a_url": ""
+		"a_url": "",
+		"urls": [
+			{
+				"domain": "MANGANATO",
+				"url": "https://chapmanganato.com/manga-vv973156"
+			}
+		]
 	},
 	{
 		"type": "MANGA",
-		"site": "MANGANATO",
 		"name": "Skeleton couldn't protect the dungeon",
-		"url": "https://chapmanganato.com/manga-bu979277",
-		"a_url": ""
+		"a_url": "",
+		"urls": [
+			{
+				"domain": "MANGANATO",
+				"url": "https://chapmanganato.com/manga-bu979277"
+			}
+		]
 	},
 	{
 		"type": "MANGA",
-		"site": "MANGANATO",
 		"name": "The dungeon master",
-		"url": "https://chapmanganato.com/manga-ds980601",
-		"a_url": ""
+		"a_url": "",
+		"urls": [
+			{
+				"domain": "MANGANATO",
+				"url": "https://chapmanganato.com/manga-ds980601"
+			}
+		]
 	},
 	{
 		"type": "MANGA",
-		"site": "MANGANATO",
 		"name": "The great mage returnas after 4000 years",
-		"url": "https://chapmanganato.com/manga-hu985229",
-		"a_url": ""
+		"a_url": "",
+		"urls": [
+			{
+				"domain": "MANGANATO",
+				"url": "https://chapmanganato.com/manga-hu985229"
+			}
+		]
 	},
 	{
 		"type": "MANGA",
-		"site": "MANGANATO",
 		"name": "The Executed Sage Is Reincarnated As A Lich And Starts An All-Out War",
-		"url": "https://chapmanganato.com/manga-if986340",
-		"a_url": ""
+		"a_url": "",
+		"urls": [
+			{
+				"domain": "MANGANATO",
+				"url": "https://chapmanganato.com/manga-if986340"
+			}
+		]
 	},
 	{
 		"type": "MANGA",
-		"site": "MANGANATO",
 		"name": "Reincarnated as an aristocrat with an appraisal skill",
-		"url": "https://chapmanganato.com/manga-iq985899",
-		"a_url": ""
+		"a_url": "",
+		"urls": [
+			{
+				"domain": "MANGANATO",
+				"url": "https://chapmanganato.com/manga-iq985899"
+			}
+		]
 	},
 	{
 		"type": "MANGA",
-		"site": "MANGANATO",
 		"name": "A returner's magic should be special",
-		"url": "https://chapmanganato.com/manga-ci980191",
-		"a_url": ""
+		"a_url": "",
+		"urls": [
+			{
+				"domain": "MANGANATO",
+				"url": "https://chapmanganato.com/manga-ci980191"
+			}
+		]
 	},
 	{
 		"type": "MANGA",
-		"site": "MANGANATO",
 		"name": "Ranker who lives a second time",
-		"url": "https://chapmanganato.com/manga-ec981811",
-		"a_url": "https://w3.secondliferanker.com/"
+		"a_url": "https://w3.secondliferanker.com/",
+		"urls": [
+			{
+				"domain": "MANGANATO",
+				"url": "https://chapmanganato.com/manga-ec981811"
+			}
+		]
 	},
 	{
 		"type": "MANGA",
-		"site": "MANGANATO",
 		"name": "The strongest Florist",
-		"url": "https://chapmanganato.com/manga-hp985172",
-		"a_url": ""
+		"a_url": "",
+		"urls": [
+			{
+				"domain": "MANGANATO",
+				"url": "https://chapmanganato.com/manga-hp985172"
+			}
+		]
 	},
 	{
 		"type": "MANGA",
-		"site": "MANGANATO",
 		"name": "Story of a low ranked soldier becoming a monarch",
-		"url": "https://chapmanganato.com/manga-mg989389",
-		"a_url": ""
+		"a_url": "",
+		"urls": [
+			{
+				"domain": "MANGANATO",
+				"url": "https://chapmanganato.com/manga-mg989389"
+			}
+		]
 	},
 	{
 		"type": "MANGA",
-		"site": "MANGANATO",
 		"name": "Seoul station's necromancer",
-		"url": "https://chapmanganato.com/manga-mf989840",
-		"a_url": ""
+		"a_url": "",
+		"urls": [
+			{
+				"domain": "MANGANATO",
+				"url": "https://chapmanganato.com/manga-mf989840"
+			}
+		]
 	},
 	{
 		"type": "MANGA",
-		"site": "MANGANATO",
 		"name": "The only necromancer",
-		"url": "https://chapmanganato.com/manga-ml989694",
-		"a_url": ""
+		"a_url": "",
+		"urls": [
+			{
+				"domain": "MANGANATO",
+				"url": "https://chapmanganato.com/manga-ml989694"
+			}
+		]
 	},
 	{
 		"type": "MANGA",
-		"site": "MANGANATO",
 		"name": "The Exiled Reincarnated Heavy Knight Is Unrivaled In Game Knowledge",
-		"url": "https://chapmanganato.com/manga-nh990916",
-		"a_url": ""
+		"a_url": "",
+		"urls": [
+			{
+				"domain": "MANGANATO",
+				"url": "https://chapmanganato.com/manga-nh990916"
+			}
+		]
 	},
 	{
 		"type": "MANGA",
-		"site": "MANGANATO",
 		"name": "The Duchess has a deathwish",
-		"url": "https://chapmanganato.com/manga-oh992190",
-		"a_url": ""
+		"a_url": "",
+		"urls": [
+			{
+				"domain": "MANGANATO",
+				"url": "https://chapmanganato.com/manga-oh992190"
+			}
+		]
 	},
 	{
 		"type": "MANGA",
-		"site": "MANGANATO",
 		"name": "The hero returns",
-		"url": "https://chapmanganato.com/manga-ni990665",
-		"a_url": ""
+		"a_url": "",
+		"urls": [
+			{
+				"domain": "MANGANATO",
+				"url": "https://chapmanganato.com/manga-ni990665"
+			}
+		]
 	},
 	{
 		"type": "MANGA",
-		"site": "MANGANATO",
 		"name": "The struggle of being reincarnated as the marquess's daughter",
-		"url": "https://manganato.com/manga-le988539",
-		"a_url": ""
+		"a_url": "",
+		"urls": [
+			{
+				"domain": "MANGANATO",
+				"url": "https://manganato.com/manga-le988539"
+			}
+		]
 	},
 	{
 		"type": "MANGA",
-		"site": "MANGANATO",
 		"name": "Academy's undercover professor",
-		"url": "https://chapmanganato.com/manga-nk991067",
-		"a_url": ""
+		"a_url": "",
+		"urls": [
+			{
+				"domain": "MANGANATO",
+				"url": "https://chapmanganato.com/manga-nk991067"
+			}
+		]
 	},
 	{
 		"type": "MANGA",
-		"site": "ASURA",
 		"name": "Standard of Reincarnation",
-		"url": "https://asura.gg/manga/standard-of-reincarnation/",
-		"a_url": ""
+		"a_url": "",
+		"urls": [
+			{
+				"domain": "ASURA",
+				"url": "https://asura.gg/manga/standard-of-reincarnation/"
+			}
+		]
 	},
 	{
 		"type": "MANGA",
-		"site": "ASURA",
 		"name": "Max level hero has returned!",
-		"url": "https://asura.gg/manga/the-max-level-hero-has-returned/",
-		"a_url": ""
+		"a_url": "",
+		"urls": [
+			{
+				"domain": "ASURA",
+				"url": "https://asura.gg/manga/the-max-level-hero-has-returned/"
+			}
+		]
 	},
 	{
 		"type": "MANGA",
-		"site": "ASURA",
 		"name": "My School Life Pretending To Be a Worthless Person",
-		"url": "https://asura.gg/manga/my-school-life-pretending-to-be-a-worthless-person/",
-		"a_url": ""
+		"a_url": "",
+		"urls": [
+			{
+				"domain": "ASURA",
+				"url": "https://asura.gg/manga/my-school-life-pretending-to-be-a-worthless-person/"
+			}
+		]
 	},
 	{
 		"type": "MANGA",
-		"site": "ASURA",
 		"name": "The Dark Magician Transmigrates After 66666 Years",
-		"url": "https://asura.gg/manga/the-dark-magician-transmigrates-after-66666-years/",
-		"a_url": ""
+		"a_url": "",
+		"urls": [
+			{
+				"domain": "ASURA",
+				"url": "https://asura.gg/manga/the-dark-magician-transmigrates-after-66666-years/"
+			}
+		]
 	},
 	{
 		"type": "MANGA",
-		"site": "ASURA",
 		"name": "Return of the SSS-class Ranker",
-		"url": "https://asura.gg/manga/return-of-the-sss-class-ranker/",
-		"a_url": ""
+		"a_url": "",
+		"urls": [
+			{
+				"domain": "ASURA",
+				"url": "https://asura.gg/manga/return-of-the-sss-class-ranker/"
+			}
+		]
 	},
 	{
 		"type": "MANGA",
-		"site": "ASURA",
 		"name": "Damn reincarnation",
-		"url": "https://asura.gg/manga/damn-reincarnation/",
-		"a_url": ""
+		"a_url": "",
+		"urls": [
+			{
+				"domain": "ASURA",
+				"url": "https://asura.gg/manga/damn-reincarnation/"
+			}
+		]
 	},
 	{
 		"type": "LIGHT_NOVEL",
-		"site": "PROFESSOR",
 		"name": "Academy's Undercover Professor Light Novel",
-		"url": "https://www.wuxiax.com/novel/academys-undercover-professor.html",
-		"a_url": ""
+		"a_url": "",
+		"urls": [
+			{
+				"domain": "WUXIAX",
+				"url": "https://www.wuxiax.com/novel/academys-undercover-professor.html"
+			},
+			{
+				"domain": "LNREADER",
+				"url": "https://lnreader.org/academys-undercover-professor-937462"
+			}
+		]
 	},
 	{
 		"type": "MANGA",
-		"site": "FLAMESCANS",
 		"name": "Reincarnation of the Murim clans former ranker",
-		"url": "https://flamescans.org/ahhh/series/1670842921-reincarnation-of-the-murim-clans-former-ranker/",
-		"a_url": ""
+		"a_url": "",
+		"urls": [
+			{
+				"domain": "FLAMESCANS",
+				"url": "https://flamescans.org/ahhh/series/1670842921-reincarnation-of-the-murim-clans-former-ranker/"
+			}
+		]
 	},
 	{
 		"type": "MANGA",
-		"site": "FLAMESCANS",
 		"name": "Used to be a boss",
-		"url": "https://flamescans.org/ahhh/series/1670842921-i-used-to-be-a-boss/",
-		"a_url": ""
+		"a_url": "",
+		"urls": [
+			{
+				"domain": "FLAMESCANS",
+				"url": "https://flamescans.org/ahhh/series/1670842921-i-used-to-be-a-boss/"
+			}
+		]
 	}
 ]
