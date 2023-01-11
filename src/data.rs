@@ -22,9 +22,9 @@ pub struct Site {
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Entry {
+    pub name: String,
     #[serde(rename = "type")]
     pub kind: String,
-    pub name: String,
     pub a_url: String,
     pub urls: Vec<Site>,
 }
@@ -157,14 +157,29 @@ pub fn get_latest_read_chapters() -> HashMap<String, CurrentChapterState> {
 
     let file = read_to_string(get_current_read_chapter_state_full_path())
         .expect("Failed to read current_chapter_state file");
-    let entries = from_str(&file).expect("Failed to parse current_chapter_state file");
-    entries
+    let entries: Vec<(String, CurrentChapterState)> = from_str(&file).expect("Failed to parse current_chapter_state file");
+
+    let mut state: HashMap<String, CurrentChapterState> = HashMap::new();
+
+    for (name, chapter_state) in entries {
+        state.insert(name, chapter_state);
+    }
+
+    state
 }
 
 pub fn update_read_chapter_state(new_state: &HashMap<String, CurrentChapterState>) {
+    let mut next_state: Vec<(&str, &CurrentChapterState)> = vec![];
+
+    for (name, state) in new_state {
+        next_state.push((name, state));
+    }
+
+    next_state.sort_by(|a, b| a.0.cmp(b.0));
+
     write(
         get_current_read_chapter_state_full_path(),
-        serde_json::to_string_pretty(&new_state).unwrap(),
+        serde_json::to_string_pretty(&next_state).unwrap(),
     )
     .unwrap();
 }
