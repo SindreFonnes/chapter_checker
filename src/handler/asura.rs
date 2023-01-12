@@ -1,5 +1,5 @@
 use super::CheckError;
-use crate::common_fn::{get_chapter_numbers_from_string, SEPERATOR};
+use crate::common_fn::{get_chapter_regex_from_string, SEPERATOR};
 
 pub fn check(text: String, url: String) -> Result<f32, CheckError> {
     let text: Vec<&str> = text.split("chapterlist").collect();
@@ -8,7 +8,7 @@ pub fn check(text: String, url: String) -> Result<f32, CheckError> {
 
     let text = text[0];
 
-    let text = get_chapter_numbers_from_string(text)?;
+    let text = get_chapter_regex_from_string(text)?;
 
     let chapter = match text.parse::<f32>() {
         Ok(float) => float,

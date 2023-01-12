@@ -5,7 +5,7 @@ use crate::handler::CheckError;
 use rand::distributions::{Distribution, Uniform};
 use regex::Regex;
 
-pub fn get_chapter_numbers_from_string(input: &str) -> Result<&str, CheckError> {
+pub fn get_chapter_regex_from_string(input: &str) -> Result<&str, CheckError> {
     let re = Regex::new(r"Chapter ([0-9,.]*)").unwrap();
 
     let text = re
@@ -14,6 +14,20 @@ pub fn get_chapter_numbers_from_string(input: &str) -> Result<&str, CheckError> 
         .map(|m| m.as_str())
         .ok_or(CheckError::Parse(
             "Couldn't find the chapter string".to_string(),
+        ))?;
+
+    Ok(text)
+}
+
+pub fn get_numbers_with_regex_capture (input: &str) -> Result<&str, CheckError> {
+    let re = Regex::new(r" ([0-9]*)").unwrap();
+
+    let text = re
+        .captures(input)
+        .and_then(|captures| captures.get(1))
+        .map(|m| m.as_str())
+        .ok_or(CheckError::Parse(
+            "Couldn't find regex numbers".to_string(),
         ))?;
 
     Ok(text)

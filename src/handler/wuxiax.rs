@@ -1,7 +1,8 @@
-use super::CheckError;
-use regex::Regex;
+use crate::common_fn::get_numbers_with_regex_capture;
 
-pub fn check(text: String, url: String) -> Result<f32, CheckError> {
+use super::CheckError;
+
+pub fn check(text: String, _: String) -> Result<f32, CheckError> {
     let text: Vec<&str> = text.split("<strong>Latest").collect();
 
     let text: Vec<_> = text[1].split("</a>").collect();
@@ -12,16 +13,7 @@ pub fn check(text: String, url: String) -> Result<f32, CheckError> {
 
     let text = text[1];
 
-    let re = Regex::new(r" ([0-9]*)").unwrap();
-
-    let text = re
-        .captures(text)
-        .and_then(|captures| captures.get(1))
-        .map(|m| m.as_str())
-        .ok_or(CheckError::Parse(format!(
-            "Couldn't find that chapter string wuxiax {}",
-            url
-        )))?;
+    let text = get_numbers_with_regex_capture(text)?;
 
     let chapter = text.parse::<f32>().unwrap();
 
