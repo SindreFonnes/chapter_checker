@@ -17,13 +17,9 @@ pub fn check(text: String, url: String) -> Result<f32, CheckError> {
 
     let text = text[1];
 
-    println!("{}", text);
-
     let float_regex = Regex::new(r"[-+]?[0-9]*\.?[0-9]+").unwrap();
 
     let text: String = float_regex.find_iter(text).map(|m| m.as_str()).collect();
-
-    println!("{}", text);
 
     let chapter = match text.parse::<f32>() {
         Ok(float) => float,
