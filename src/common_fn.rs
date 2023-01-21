@@ -19,18 +19,24 @@ pub fn get_chapter_regex_from_string(input: &str) -> Result<&str, CheckError> {
     Ok(text)
 }
 
-pub fn get_numbers_with_regex_capture (input: &str) -> Result<&str, CheckError> {
+pub fn get_numbers_with_regex_capture(input: &str) -> Result<&str, CheckError> {
     let re = Regex::new(r" ([0-9]*)").unwrap();
 
     let text = re
         .captures(input)
         .and_then(|captures| captures.get(1))
         .map(|m| m.as_str())
-        .ok_or(CheckError::Parse(
-            "Couldn't find regex numbers".to_string(),
-        ))?;
+        .ok_or(CheckError::Parse("Couldn't find regex numbers".to_string()))?;
 
     Ok(text)
+}
+
+pub fn filter_non_number_chars_from_string(input: &str) -> String {
+    let float_regex = Regex::new(r"[-+]?[0-9]*\.?[0-9]+").unwrap();
+
+    let text: String = float_regex.find_iter(input).map(|m| m.as_str()).collect();
+
+    text
 }
 
 const USER_AGENT_LIST: [&str; 3] = [

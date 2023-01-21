@@ -12,6 +12,7 @@ pub enum SiteDomain {
     Wuxiax,
     Flamescans,
     Lnreader,
+    Manhwafreak,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]

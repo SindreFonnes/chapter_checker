@@ -3,6 +3,7 @@ mod flamescans;
 mod lnreader;
 mod manganato;
 mod wuxiax;
+mod manhwafreak;
 
 use core::fmt;
 use std::num::ParseFloatError;
@@ -39,6 +40,7 @@ async fn site_handler(site: &Site) -> Result<f32, CheckError> {
             SiteDomain::Wuxiax => wuxiax::check(site_text, site.url.clone()),
             SiteDomain::Flamescans => flamescans::check(site_text, site.url.clone()),
             SiteDomain::Lnreader => lnreader::check(site_text, site.url.clone()),
+            SiteDomain::Manhwafreak => manhwafreak::check(site_text, site.url.clone()),
         }
     }?;
 
