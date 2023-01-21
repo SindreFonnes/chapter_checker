@@ -178,7 +178,7 @@
 	{
 		"type": "MANGA",
 		"name": "Academy's undercover professor",
-		"a_url": "",
+		"a_url": "https://www.asurascans.com/manga/1672760368-academys-undercover-professor/",
 		"urls": [
 			{
 				"domain": "MANGANATO",
@@ -216,6 +216,17 @@
 			{
 				"domain": "ASURA",
 				"url": "https://asura.gg/manga/my-school-life-pretending-to-be-a-worthless-person/"
+			}
+		]
+	},
+	{
+		"type": "MANGA",
+		"name": "Solo leveling",
+		"a_url": "",
+		"urls": [
+			{
+				"domain": "ASURA",
+				"url": "https://www.asurascans.com/manga/1672760368-solo-leveling/"
 			}
 		]
 	},
