@@ -81,7 +81,7 @@ fn add_client_headers(request_builder: RequestBuilder) -> RequestBuilder {
         .header("Sec-Fetch-Site", "none")
         .header("Sec-Fetch-User", "?1")
         .header("Cache-Control", "max-age=0")
-    //.header("Accept-Encoding", "gzip, deflate")
+        .header("Accept-Encoding", "gzip, deflate")
 }
 
 async fn get_site_respone(site: &str) -> Result<Response, reqwest::Error> {
