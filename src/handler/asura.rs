@@ -1,5 +1,6 @@
 use super::CheckError;
-use crate::common_fn::{get_chapter_regex_from_string, SEPERATOR};
+use crate::common_fn::{get_chapter_regex_from_string};
+use crate::structs_and_types::SEPERATOR;
 
 pub fn check(text: String, url: String) -> Result<f32, CheckError> {
     let text: Vec<&str> = text.split("chapterlist").collect();

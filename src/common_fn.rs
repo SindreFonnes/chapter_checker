@@ -6,14 +6,16 @@ use futures::{stream, StreamExt};
 use regex::Regex;
 use reqwest::{RequestBuilder, Response};
 
-use crate::data::{get_current_read_chapter_state, get_current_site_url_state};
+use crate::data::{
+    change_a_site_url_state, get_current_read_chapter_state, get_current_site_url_state,
+};
 use crate::structs_and_types::{Entry, ReleaseStruct};
 use crate::{
     handler::{handle, CheckError},
     structs_and_types::CurrentChapterState,
 };
 
-pub fn get_chapter_regex_from_string(input: &str) -> Result<&str, CheckError> {
+pub(crate) fn get_chapter_regex_from_string(input: &str) -> Result<&str, CheckError> {
     let re = Regex::new(r"Chapter ([0-9,.]*)").unwrap();
 
     let text = re
@@ -27,7 +29,7 @@ pub fn get_chapter_regex_from_string(input: &str) -> Result<&str, CheckError> {
     Ok(text)
 }
 
-pub fn get_numbers_with_regex_capture(input: &str) -> Result<&str, CheckError> {
+pub(crate) fn get_numbers_with_regex_capture(input: &str) -> Result<&str, CheckError> {
     let re = Regex::new(r" ([0-9]*)").unwrap();
 
     let text = re
@@ -39,7 +41,7 @@ pub fn get_numbers_with_regex_capture(input: &str) -> Result<&str, CheckError> {
     Ok(text)
 }
 
-pub fn filter_non_number_chars_from_string(input: &str) -> String {
+pub(crate) fn filter_non_number_chars_from_string(input: &str) -> String {
     let float_regex = Regex::new(r"[-+]?[0-9]*\.?[0-9]+").unwrap();
 
     let text: String = float_regex.find_iter(input).map(|m| m.as_str()).collect();
@@ -105,7 +107,7 @@ async fn get_site_respone(site: &str) -> Result<Response, reqwest::Error> {
     Ok(response)
 }
 
-pub async fn get_site_as_string(site: &str) -> Result<String, reqwest::Error> {
+pub(crate) async fn get_site_as_string(site: &str) -> Result<String, reqwest::Error> {
     let response = match get_site_respone(site).await {
         Ok(resp) => resp,
         Err(err) => return Err(err),
@@ -120,64 +122,25 @@ pub async fn get_site_as_string(site: &str) -> Result<String, reqwest::Error> {
             .expect(format!("Failed to unwrap new url to {}", site).as_str());
         println!("{} changed url to {:?}", site, &new_url);
 
-        let response = match get_site_respone(
-            &new_url.to_str().expect(
-                format!(
-                    "Failed to parse new_url to string for {}, {:?}",
-                    site, new_url
-                )
-                .as_str(),
-            ),
-        )
-        .await
-        {
+        let new_url = new_url.to_str().expect(
+            format!(
+                "Failed to parse new_url to string for {}, {:?}",
+                site, new_url
+            )
+            .as_str(),
+        );
+
+        let response = match get_site_respone(&new_url).await {
             Ok(resp) => resp,
             Err(err) => return Err(err),
         };
+
+        change_a_site_url_state(site, new_url);
 
         return response.text().await;
     }
 
     response.text().await
-}
-
-pub const SEPERATOR: &str = "----------------";
-
-pub fn announce_new_chapter(
-    entry: &Entry,
-    newest_chapter: &f32,
-    last_read_chapter: &f32,
-    last_updated: &String,
-) {
-    println!("{SEPERATOR}");
-    println!("Name : {}", entry.name);
-    println!("Type : {}", entry.kind);
-    println!("Urls : {:?}", entry.urls);
-    if entry.a_url != "".to_owned() {
-        println!("AUrl : {}", entry.a_url);
-    }
-    println!("");
-    println!("The newest chapter is : {}", newest_chapter);
-    println!("Last read chapter was : {}", last_read_chapter);
-    println!("It was last updated   : {}", last_updated);
-    println!("{SEPERATOR}");
-}
-
-pub fn check_and_anounce_chapter(new_releases: &Vec<ReleaseStruct>) {
-    if new_releases.len() > 0 {
-        println!("There are new chapters for:");
-        for entry in new_releases {
-            announce_new_chapter(
-                &entry.entry,
-                &entry.newest_chapter,
-                &entry.last_read_chapter,
-                &entry.last_updated,
-            );
-        }
-        return;
-    }
-
-    println!("There are no new chapters...")
 }
 
 fn get_entries() -> Vec<Entry> {

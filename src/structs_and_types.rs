@@ -38,3 +38,5 @@ pub struct ReleaseStruct {
     pub last_read_chapter: f32,
     pub last_updated: String,
 }
+
+pub(crate) const SEPERATOR: &str = "----------------";

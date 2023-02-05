@@ -1,4 +1,4 @@
-use crate::structs_and_types::{CurrentChapterState, Entry, ReleaseStruct};
+use crate::structs_and_types::{CurrentChapterState, Entry, ReleaseStruct, Site};
 use chrono::Utc;
 use serde_json::from_str;
 use std::collections::HashMap;
@@ -63,7 +63,46 @@ fn update_site_url_state(new_state: &HashMap<String, Entry>) {
     .expect("Failed to write to current_site_state file");
 }
 
-pub fn get_current_site_url_state() -> HashMap<String, Entry> {
+fn process_site_urls_and_update_if_match_is_found(
+    old_url: &str,
+    new_url: &str,
+    entry: &Entry,
+) -> Vec<Site> {
+    let mut next_site_state: Vec<Site> = vec![];
+
+    for site in &entry.urls {
+        if site.url == old_url {
+            next_site_state.push(Site {
+                url: new_url.to_owned().clone(),
+                domain: site.domain.clone(),
+            });
+        }
+        next_site_state.push(Site {
+            url: site.url.clone(),
+            domain: site.domain.clone(),
+        })
+    }
+
+    next_site_state
+}
+
+pub(crate) fn change_a_site_url_state(old_url: &str, new_url: &str) {
+    let current_state = read_current_site_url_state();
+
+    let mut next_state: HashMap<String, Entry> = HashMap::new();
+
+    for (name, mut entry) in current_state {
+        let sites = process_site_urls_and_update_if_match_is_found(old_url, new_url, &entry);
+
+        entry.urls = sites;
+
+        next_state.insert(name, entry);
+    }
+
+    update_site_url_state(&next_state);
+}
+
+pub(crate) fn get_current_site_url_state() -> HashMap<String, Entry> {
     if !check_if_current_site_url_state_exists() {
         create_dir_all(get_state_location())
             .expect("Could not create .app_data/chapter_checker folder");
@@ -106,7 +145,6 @@ pub fn get_current_site_url_state() -> HashMap<String, Entry> {
 
     state
 }
-
 
 pub fn wipe_site_state_file() {
     remove_file(get_current_site_url_state_full_path())

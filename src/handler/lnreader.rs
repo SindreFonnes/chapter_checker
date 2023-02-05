@@ -1,5 +1,5 @@
 use super::CheckError;
-use crate::common_fn::SEPERATOR;
+use crate::structs_and_types::SEPERATOR;
 use regex::Regex;
 
 pub fn check(text: String, url: String) -> Result<f32, CheckError> {

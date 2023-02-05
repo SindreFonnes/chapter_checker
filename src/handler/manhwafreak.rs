@@ -1,5 +1,6 @@
 use super::CheckError;
-use crate::common_fn::{filter_non_number_chars_from_string, SEPERATOR};
+use crate::common_fn::{filter_non_number_chars_from_string};
+use crate::structs_and_types::SEPERATOR;
 
 pub fn check(text: String, url: String) -> Result<f32, CheckError> {
     let text: Vec<&str> = text.split("<h2>Lastest Chapters</h2>").collect();
