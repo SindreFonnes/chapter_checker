@@ -2,18 +2,16 @@ mod asura;
 mod flamescans;
 mod lnreader;
 mod manganato;
-mod wuxiax;
 mod manhwafreak;
+mod wuxiax;
 
 use core::fmt;
 use std::num::ParseFloatError;
 
 use futures::StreamExt;
 
-use crate::{
-    common_fn::get_site_as_string,
-    data::{Entry, Site, SiteDomain},
-};
+use crate::common_fn::get_site_as_string;
+use crate::structs_and_types::{Entry, Site, SiteDomain};
 
 #[derive(Debug)]
 pub enum CheckError {

@@ -1,40 +1,9 @@
-use serde::{Deserialize, Serialize};
+use crate::structs_and_types::{CurrentChapterState, Entry, ReleaseStruct};
+use chrono::Utc;
 use serde_json::from_str;
 use std::collections::HashMap;
 use std::fs::{create_dir_all, read_to_string, remove_file, write};
 use std::io::Write;
-
-#[derive(Debug, Clone, Serialize, Deserialize)]
-#[serde(rename_all = "SCREAMING_SNAKE_CASE")]
-pub enum SiteDomain {
-    Manganato,
-    Asura,
-    Wuxiax,
-    Flamescans,
-    Lnreader,
-    Manhwafreak,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct Site {
-    pub domain: SiteDomain,
-    pub url: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct Entry {
-    pub name: String,
-    #[serde(rename = "type")]
-    pub kind: String,
-    pub a_url: String,
-    pub urls: Vec<Site>,
-}
-
-#[derive(Serialize, Clone, Deserialize, Debug)]
-pub struct CurrentChapterState {
-    pub last_chapter_read: f32,
-    pub last_updated: String,
-}
 
 fn get_init_entries() -> Vec<Entry> {
     let text = include_str!("../data/data.json");
@@ -145,7 +114,7 @@ fn check_if_current_read_chapter_state_exists() -> bool {
     std::path::Path::new(&get_current_read_chapter_state_full_path()).is_file()
 }
 
-pub fn get_latest_read_chapters() -> HashMap<String, CurrentChapterState> {
+pub fn get_current_read_chapter_state() -> HashMap<String, CurrentChapterState> {
     if !check_if_current_read_chapter_state_exists() {
         create_dir_all(get_state_location())
             .expect("Failed to create .app_data/chapter_checker folder");
@@ -158,7 +127,9 @@ pub fn get_latest_read_chapters() -> HashMap<String, CurrentChapterState> {
 
     let file = read_to_string(get_current_read_chapter_state_full_path())
         .expect("Failed to read current_chapter_state file");
-    let entries: Vec<(String, CurrentChapterState)> = from_str(&file).expect("Failed to parse current_chapter_state file");
+
+    let entries: Vec<(String, CurrentChapterState)> =
+        from_str(&file).expect("Failed to parse current_chapter_state file");
 
     let mut state: HashMap<String, CurrentChapterState> = HashMap::new();
 
@@ -169,14 +140,37 @@ pub fn get_latest_read_chapters() -> HashMap<String, CurrentChapterState> {
     state
 }
 
-pub fn update_read_chapter_state(new_state: &HashMap<String, CurrentChapterState>) {
-    let mut next_state: Vec<(&str, &CurrentChapterState)> = vec![];
+pub fn update_read_chapter_state(new_releases: &Vec<ReleaseStruct>) {
+    if new_releases.len() == 0 {
+        return;
+    }
 
-    for (name, state) in new_state {
+    let mut state = get_current_read_chapter_state();
+
+    for release in new_releases {
+        let name = release.entry.name.clone();
+
+        state
+            .entry(name)
+            .and_modify(|current| {
+                if current.last_chapter_read < release.last_read_chapter {
+                    current.last_chapter_read = release.last_read_chapter;
+                    current.last_updated = format!("{}", Utc::now());
+                }
+            })
+            .or_insert(CurrentChapterState {
+                last_chapter_read: 0.0,
+                last_updated: format!("{}", Utc::now()),
+            });
+    }
+
+    let mut next_state: Vec<(String, CurrentChapterState)> = vec![];
+
+    for (name, state) in state {
         next_state.push((name, state));
     }
 
-    next_state.sort_by(|a, b| a.0.cmp(b.0));
+    next_state.sort_by(|a, b| a.0.cmp(&b.0));
 
     write(
         get_current_read_chapter_state_full_path(),

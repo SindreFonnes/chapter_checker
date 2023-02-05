@@ -1,9 +1,17 @@
+use std::collections::HashMap;
+
+use chrono::Utc;
+use futures::{stream, StreamExt};
+//use rand::distributions::{Distribution, Uniform};
+use regex::Regex;
 use reqwest::{RequestBuilder, Response};
 
-use crate::data::Entry;
-use crate::handler::CheckError;
-use rand::distributions::{Distribution, Uniform};
-use regex::Regex;
+use crate::data::{get_entries, get_current_read_chapter_state};
+use crate::structs_and_types::{Entry, ReleaseStruct};
+use crate::{
+    handler::{handle, CheckError},
+    structs_and_types::CurrentChapterState,
+};
 
 pub fn get_chapter_regex_from_string(input: &str) -> Result<&str, CheckError> {
     let re = Regex::new(r"Chapter ([0-9,.]*)").unwrap();
@@ -39,41 +47,19 @@ pub fn filter_non_number_chars_from_string(input: &str) -> String {
     text
 }
 
-const USER_AGENT_LIST: [&str; 3] = [
-    "Mozilla/5.0 (iPad; CPU OS 12_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
-    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.83 Safari/537.36",
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.51 Safari/537.36"
-];
-
-fn get_user_agent() -> &'static str {
-    let mut rng = rand::thread_rng();
-    let range = Uniform::from(0..3);
-    let random_index = range.sample(&mut rng);
-    println!("{}", random_index);
-    USER_AGENT_LIST[random_index]
-}
-
-//use reqwest::{
-//    header::{ACCEPT, CACHE_CONTROL, CONNECTION, USER_AGENT},
-//    RequestBuilder, Response,
-//};
-//.header(USER_AGENT, get_user_agent())
-//.header(CONNECTION, "keep-alive")
-//.header(CACHE_CONTROL, "max-age=0")
-//.header(
-//    "sec-ch-ua",
-//    "\" Not A;Brand\";v=\"99\", \"Chromium\";v=\"99\", \"Google Chrome\";v=\"99\"",
-//)
-//.header("sec-ch-ua-mobile", "?0")
-//.header("sec-ch-ua-platform", "macOS")
-//.header("Upgrade-Insecure-Requests", "1")
-//.header(ACCEPT, "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9")
-//.header("Sec-Fetch-Site", "none")
-//.header("Sec-Fetch-Mode", "navigate")
-//.header("Sec-Fetch-User", "?1")
-//.header("Sec-Fetch-Dest", "document")
-//.header("Accept-Language", "en-GB,en-US;q=0.9,en;q=0.8")
-//.header("Accept-Encoding", "gzip, deflate, br")
+//const USER_AGENT_LIST: [&str; 3] = [
+//    "Mozilla/5.0 (iPad; CPU OS 12_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+//    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.83 Safari/537.36",
+//    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.51 Safari/537.36"
+//];
+//
+//fn get_user_agent() -> &'static str {
+//    let mut rng = rand::thread_rng();
+//    let range = Uniform::from(0..3);
+//    let random_index = range.sample(&mut rng);
+//    println!("{}", random_index);
+//    USER_AGENT_LIST[random_index]
+//}
 
 fn add_client_headers(request_builder: RequestBuilder) -> RequestBuilder {
     request_builder
@@ -175,4 +161,61 @@ pub fn announce_new_chapter(
     println!("Last read chapter was : {}", last_read_chapter);
     println!("It was last updated   : {}", last_updated);
     println!("{SEPERATOR}");
+}
+
+pub fn check_and_anounce_chapter(new_releases: &Vec<ReleaseStruct>) {
+    if new_releases.len() > 0 {
+        println!("There are new chapters for:");
+        for entry in new_releases {
+            announce_new_chapter(
+                &entry.entry,
+                &entry.newest_chapter,
+                &entry.last_read_chapter,
+                &entry.last_updated,
+            );
+        }
+        return;
+    }
+
+    println!("There are no new chapters...")
+}
+
+pub async fn check_for_chapter_updates() -> Vec<ReleaseStruct> {
+    let entries = get_entries();
+
+    let results: Vec<Result<(Entry, f32), _>> = stream::iter(entries.iter().map(handle))
+        .buffer_unordered(30)
+        .collect()
+        .await;
+
+    let state: HashMap<String, CurrentChapterState> = get_current_read_chapter_state();
+
+    let mut new_releases: Vec<ReleaseStruct> = vec![];
+
+    for site in results {
+        if let Ok((entry, chapter)) = site {
+            let old_entry_state = state.get(&entry.name);
+
+            match old_entry_state {
+                Some(previous_state) => {
+                    if previous_state.last_chapter_read < chapter {
+                        new_releases.push(ReleaseStruct {
+                            entry: entry.clone(),
+                            newest_chapter: chapter.clone(),
+                            last_read_chapter: previous_state.last_chapter_read.clone(),
+                            last_updated: previous_state.last_updated.clone(),
+                        })
+                    }
+                }
+                None => new_releases.push(ReleaseStruct {
+                    entry: entry.clone(),
+                    newest_chapter: chapter.clone(),
+                    last_read_chapter: 0.0,
+                    last_updated: format!("{}", Utc::now()),
+                }),
+            }
+        }
+    }
+
+    new_releases
 }
