@@ -6,7 +6,7 @@ use futures::{stream, StreamExt};
 use regex::Regex;
 use reqwest::{RequestBuilder, Response};
 
-use crate::data::{get_entries, get_current_read_chapter_state};
+use crate::data::{get_current_read_chapter_state, get_current_site_url_state};
 use crate::structs_and_types::{Entry, ReleaseStruct};
 use crate::{
     handler::{handle, CheckError},
@@ -178,6 +178,11 @@ pub fn check_and_anounce_chapter(new_releases: &Vec<ReleaseStruct>) {
     }
 
     println!("There are no new chapters...")
+}
+
+fn get_entries() -> Vec<Entry> {
+    let state = get_current_site_url_state();
+    state.into_values().collect()
 }
 
 pub async fn check_for_chapter_updates() -> Vec<ReleaseStruct> {

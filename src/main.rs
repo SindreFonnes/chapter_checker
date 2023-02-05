@@ -1,18 +1,13 @@
-mod common_fn;
-mod data;
-mod handler;
-mod structs_and_types;
-
-use common_fn::{check_and_anounce_chapter, check_for_chapter_updates};
-use data::{update_read_chapter_state, wipe_stored_read_chapter_data};
-
-use crate::data::wipe_site_state_file;
+use chapter_checker::common_fn::{check_and_anounce_chapter, check_for_chapter_updates};
+use chapter_checker::data::{
+    update_read_chapter_state, wipe_site_state_file, wipe_stored_read_chapter_data,
+};
 
 #[tokio::main]
 async fn main() {
     let args: Vec<String> = std::env::args().collect();
 
-    let new_releases= check_for_chapter_updates().await;
+    let new_releases = check_for_chapter_updates().await;
 
     check_and_anounce_chapter(&new_releases);
 

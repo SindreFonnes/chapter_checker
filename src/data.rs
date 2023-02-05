@@ -23,20 +23,52 @@ fn get_state_location() -> String {
 
 const CURRENT_SITE_STATE_FILE: &str = "current_site_url_state.json";
 
-fn get_current_site_state_full_path() -> String {
+fn get_current_site_url_state_full_path() -> String {
     format!("{}/{}", get_state_location(), CURRENT_SITE_STATE_FILE)
 }
 
-fn check_if_current_site_state_exists() -> bool {
-    std::path::Path::new(&get_current_site_state_full_path()).is_file()
+fn check_if_current_site_url_state_exists() -> bool {
+    std::path::Path::new(&get_current_site_url_state_full_path()).is_file()
 }
 
-pub fn get_current_site_state() -> HashMap<String, Entry> {
-    if !check_if_current_site_state_exists() {
+fn read_current_site_url_state() -> HashMap<String, Entry> {
+    let file = read_to_string(get_current_site_url_state_full_path())
+        .expect("Failed to read from current_site_state file");
+
+    let state: Vec<(String, Entry)> =
+        from_str(&file).expect("Failed to parse current_site_state file");
+
+    let mut result: HashMap<String, Entry> = HashMap::new();
+
+    for entry in state {
+        result.insert(entry.0, entry.1);
+    }
+
+    result
+}
+
+fn update_site_url_state(new_state: &HashMap<String, Entry>) {
+    let mut next_state: Vec<(&str, &Entry)> = vec![];
+
+    for (name, state) in new_state {
+        next_state.push((name, state));
+    }
+
+    next_state.sort_by(|a, b| a.0.cmp(&b.0));
+
+    write(
+        get_current_site_url_state_full_path(),
+        serde_json::to_string_pretty(&next_state).expect("Failed to stringify current_site_state"),
+    )
+    .expect("Failed to write to current_site_state file");
+}
+
+pub fn get_current_site_url_state() -> HashMap<String, Entry> {
+    if !check_if_current_site_url_state_exists() {
         create_dir_all(get_state_location())
             .expect("Could not create .app_data/chapter_checker folder");
 
-        std::fs::File::create(get_current_site_state_full_path())
+        std::fs::File::create(get_current_site_url_state_full_path())
             .expect("Could not create site state file");
 
         let init_site_state: HashMap<String, Entry> = {
@@ -48,19 +80,12 @@ pub fn get_current_site_state() -> HashMap<String, Entry> {
             result
         };
 
-        write(
-            get_current_site_state_full_path(),
-            serde_json::to_string_pretty(&init_site_state).unwrap(),
-        )
-        .expect("Failed to write init state to current_site_state file");
+        update_site_url_state(&init_site_state);
 
         return init_site_state;
     }
 
-    let file = read_to_string(get_current_site_state_full_path())
-        .expect("Failed to read from current_site_state file");
-    let state: HashMap<String, Entry> =
-        from_str(&file).expect("Failed to parse current_site_state file");
+    let state = read_current_site_url_state();
 
     let state_keys = state.keys();
     let init_entries = get_init_entries();
@@ -74,7 +99,7 @@ pub fn get_current_site_state() -> HashMap<String, Entry> {
             }
         }
 
-        update_site_state(&next_state);
+        update_site_url_state(&next_state);
 
         return next_state;
     }
@@ -82,22 +107,10 @@ pub fn get_current_site_state() -> HashMap<String, Entry> {
     state
 }
 
-pub fn update_site_state(new_state: &HashMap<String, Entry>) {
-    write(
-        get_current_site_state_full_path(),
-        serde_json::to_string_pretty(&new_state).expect("Failed to stringify current_site_state"),
-    )
-    .expect("Failed to write to current_site_state file");
-}
 
 pub fn wipe_site_state_file() {
-    remove_file(get_current_site_state_full_path())
+    remove_file(get_current_site_url_state_full_path())
         .expect("Failed to wipe current_site_state file");
-}
-
-pub fn get_entries() -> Vec<Entry> {
-    let state = get_current_site_state();
-    state.into_values().collect()
 }
 
 const CURRENT_READ_CHAPTER_STATE_FILE_NAME: &str = "current_chapter_state.json";
@@ -118,8 +131,10 @@ pub fn get_current_read_chapter_state() -> HashMap<String, CurrentChapterState> 
     if !check_if_current_read_chapter_state_exists() {
         create_dir_all(get_state_location())
             .expect("Failed to create .app_data/chapter_checker folder");
+
         let mut state_file = std::fs::File::create(get_current_read_chapter_state_full_path())
             .expect("Couldn't create current_chapter_state file");
+
         state_file
             .write_all("{}".as_bytes())
             .expect("Failed to write to state file");
