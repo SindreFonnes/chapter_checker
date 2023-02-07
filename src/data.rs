@@ -206,7 +206,7 @@ pub fn update_read_chapter_state(new_releases: &Vec<ReleaseStruct>) {
         state
             .entry(name)
             .and_modify(|current| {
-                if current.last_chapter_read < release.last_read_chapter {
+                if current.last_chapter_read < release.newest_chapter {
                     current.last_chapter_read = release.newest_chapter;
                     current.last_updated = format!("{}", Utc::now());
                 }
