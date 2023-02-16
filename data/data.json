@@ -144,17 +144,6 @@
 	},
 	{
 		"type": "MANGA",
-		"name": "The Duchess has a deathwish",
-		"a_url": "",
-		"urls": [
-			{
-				"domain": "MANGANATO",
-				"url": "https://chapmanganato.com/manga-oh992190"
-			}
-		]
-	},
-	{
-		"type": "MANGA",
 		"name": "The hero returns",
 		"a_url": "",
 		"urls": [
