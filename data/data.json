@@ -150,6 +150,14 @@
 			{
 				"domain": "MANGANATO",
 				"url": "https://chapmanganato.com/manga-ni990665"
+			},
+			{
+				"domain": "FLAMESCANS",
+				"url": "https://flamescans.org/series/1680170522-hero-returns/"
+			},
+			{
+				"domain": "ASURA",
+				"url": "https://www.asurascans.com/manga/1948049029-the-hero-returns/"
 			}
 		]
 	},
@@ -286,17 +294,6 @@
 			{
 				"domain": "FLAMESCANS",
 				"url": "https://flamescans.org/ahhh/series/1670842921-i-used-to-be-a-boss/"
-			}
-		]
-	},
-	{
-		"type": "MANGA",
-		"name": "Hero, Returns",
-		"a_url": "",
-		"urls": [
-			{
-				"domain": "FLAMESCANS",
-				"url": "https://flamescans.org/series/1680170522-hero-returns/"
 			}
 		]
 	}
