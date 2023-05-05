@@ -196,6 +196,17 @@
 	},
 	{
 		"type": "MANGA",
+		"name": "I Reincarnated As The Crazed Heir",
+		"a_url": "",
+		"urls": [
+			{
+				"domain": "ASURA",
+				"url": "https://www.asurascans.com/manga/8239705535-i-reincarnated-as-the-crazed-heir/"
+			}
+		]
+	},
+	{
+		"type": "MANGA",
 		"name": "Max level hero has returned!",
 		"a_url": "",
 		"urls": [
