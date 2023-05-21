@@ -307,5 +307,16 @@
 				"url": "https://flamescans.org/ahhh/series/1670842921-i-used-to-be-a-boss/"
 			}
 		]
+	},
+	{
+		"type": "MANGA",
+		"name": "Jujutsu kaisen",
+		"a_url": "https://w9.jujmanga.com/",
+		"urls": [
+			{
+				"domain": "MANGANATO",
+				"url": "https://chapmanganato.com/manga-ba979135"
+			}
+		]
 	}
 ]
