@@ -15,6 +15,13 @@ use crate::{
     structs_and_types::CurrentChapterState,
 };
 
+pub(crate) fn parse_site_len_wrong (arr: &Vec<&str>, error_string: String) -> Result<(), CheckError> {
+    if arr.len() < 2 {
+        return Err(CheckError::Parse(error_string))
+    }
+    Ok(())
+}
+
 pub(crate) fn get_chapter_regex_from_string(input: &str) -> Result<&str, CheckError> {
     let re = Regex::new(r"Chapter ([0-9,.]*)").unwrap();
 

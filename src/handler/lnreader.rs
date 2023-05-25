@@ -1,5 +1,5 @@
 use super::CheckError;
-use crate::structs_and_types::SEPERATOR;
+use crate::{structs_and_types::SEPERATOR, common_fn::parse_site_len_wrong};
 use regex::Regex;
 
 pub fn check(text: String, url: String) -> Result<f32, CheckError> {
@@ -7,13 +7,23 @@ pub fn check(text: String, url: String) -> Result<f32, CheckError> {
         .split("<div class=\"novels-detail-right-in-left\">Latest Chapters:</div>")
         .collect();
 
+    let parse_error_message = format!("Error parsing lnreader: {}", url);
+
+    parse_site_len_wrong(&text, parse_error_message.clone())?;
+
     let text: Vec<&str> = text[1]
         .split("<div class=\"novels-detail-right-in-right\">")
         .collect();
 
+        parse_site_len_wrong(&text, parse_error_message.clone())?;
+
     let text: Vec<_> = text[1].split("</a>").collect();
 
+    parse_site_len_wrong(&text, parse_error_message.clone())?;
+
     let text: Vec<_> = text[0].split("class=\"box\">").collect();
+
+    parse_site_len_wrong(&text, parse_error_message.clone())?;
 
     let text = text[1];
 
