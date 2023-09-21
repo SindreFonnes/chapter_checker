@@ -20,15 +20,19 @@ pub fn check(text: String, url: String) -> Result<f32, CheckError> {
 
     parse_site_len_wrong(&text, parse_error_message.clone())?;
 
-    let re = Regex::new(r"[^\d.]").unwrap();
+    let get_number = Regex::new(r"([0-9])\w+").unwrap();
 
-    let chapter = re
-        .replace_all(text[1], "")
-        .to_string()
-        .parse::<f32>()
-        .map_err(|err| {
-            CheckError::Parse(format!("Couldn't parse float manganato {err} {}", url))
-        })?;
+    let chapter = get_number
+        .captures(text[1])
+        .and_then(|captures| captures.get(0))
+        .map(|m| m.as_str())
+        .ok_or(CheckError::Parse(
+            "Couldn't find the chapter string".to_string(),
+        ))?;
+
+    let chapter = chapter.parse::<f32>().map_err(|err| {
+        CheckError::Parse(format!("Couldn't parse float manganato {err} {}", url))
+    })?;
 
     Ok(chapter)
 }
