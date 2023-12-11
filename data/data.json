@@ -144,6 +144,17 @@
 	},
 	{
 		"type": "MANGA",
+		"name": "Mercenary Enrollment",
+		"a_url": "",
+		"urls": [
+			{
+				"domain": "MANGANATO",
+				"url": "https://chapmanganato.com/manga-jz987182"
+			}
+		]
+	},
+	{
+		"type": "MANGA",
 		"name": "The hero returns",
 		"a_url": "",
 		"urls": [
