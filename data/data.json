@@ -23,6 +23,17 @@
 	},
 	{
 		"type": "MANGA",
+		"name": "Catastrophic Necromancer",
+		"a_url": "",
+		"urls": [
+			{
+				"domain": "MANGANATO",
+				"url": "https://manganato.com/manga-td996812"
+			}
+		]
+	},
+	{
+		"type": "MANGA",
 		"name": "The dungeon master",
 		"a_url": "",
 		"urls": [
