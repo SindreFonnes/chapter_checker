@@ -12,23 +12,12 @@
 	},
 	{
 		"type": "MANGA",
-		"name": "Skeleton couldn't protect the dungeon",
-		"a_url": "",
-		"urls": [
-			{
-				"domain": "MANGANATO",
-				"url": "https://chapmanganato.com/manga-bu979277"
-			}
-		]
-	},
-	{
-		"type": "MANGA",
 		"name": "Catastrophic Necromancer",
 		"a_url": "",
 		"urls": [
 			{
 				"domain": "MANGANATO",
-				"url": "https://manganato.com/manga-td996812"
+				"url": "https://chapmanganato.to/manga-td996812"
 			}
 		]
 	},
@@ -186,7 +175,7 @@
 		"urls": [
 			{
 				"domain": "MANGANATO",
-				"url": "https://manganato.com/manga-le988539"
+				"url": "https://chapmanganato.to/manga-le988539"
 			}
 		]
 	},
@@ -198,17 +187,6 @@
 			{
 				"domain": "MANGANATO",
 				"url": "https://chapmanganato.com/manga-nk991067"
-			}
-		]
-	},
-	{
-		"type": "MANGA",
-		"name": "Standard of Reincarnation",
-		"a_url": "",
-		"urls": [
-			{
-				"domain": "MANGANATO",
-				"url": "https://chapmanganato.com/manga-ok991993"
 			}
 		]
 	},
@@ -310,8 +288,8 @@
 		"a_url": "",
 		"urls": [
 			{
-				"domain": "FLAMESCANS",
-				"url": "https://flamescans.org/ahhh/series/1670842921-reincarnation-of-the-murim-clans-former-ranker/"
+				"domain": "MANGANATO",
+				"url": "https://chapmanganato.to/manga-ms990101"
 			}
 		]
 	},
@@ -321,8 +299,8 @@
 		"a_url": "",
 		"urls": [
 			{
-				"domain": "FLAMESCANS",
-				"url": "https://flamescans.org/ahhh/series/1670842921-i-used-to-be-a-boss/"
+				"domain": "MANGANATO",
+				"url": "https://chapmanganato.to/manga-qo993523"
 			}
 		]
 	},
@@ -334,6 +312,17 @@
 			{
 				"domain": "MANGANATO",
 				"url": "https://chapmanganato.com/manga-ba979135"
+			}
+		]
+	},
+	{
+		"type": "MANGA",
+		"name": "I became an evolving space monster",
+		"a_url": "",
+		"urls": [
+			{
+				"domain": "MANGANATO",
+				"url": "https://manganato.com/manga-uh998064"
 			}
 		]
 	}
