@@ -325,5 +325,16 @@
 				"url": "https://manganato.com/manga-uh998064"
 			}
 		]
+	},
+	{
+		"type": "MANGA",
+		"name": "Kingdom",
+		"a_url": "",
+		"urls": [
+			{
+				"domain": "MANGANATO",
+				"url": "https://chapmanganato.to/manga-qi951517"
+			}
+		]
 	}
 ]
