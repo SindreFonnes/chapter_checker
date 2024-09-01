@@ -2,9 +2,11 @@ use chapter_checker::check_for_chapter_updates;
 use chapter_checker::data::{
     update_read_chapter_state, wipe_site_state_file, wipe_stored_read_chapter_data,
 };
-use chapter_checker::structs_and_types::{ReleaseStruct, Entry};
+use chapter_checker::structs_and_types::{Entry, ReleaseStruct};
 
 const SEPERATOR: &str = "----------------";
+
+const EMPTY_STRING: &str = "";
 
 fn announce_new_chapter(
     entry: &Entry,
@@ -16,10 +18,10 @@ fn announce_new_chapter(
     println!("Name : {}", entry.name);
     println!("Type : {}", entry.kind);
     println!("Urls : {:?}", entry.urls);
-    if entry.a_url != "".to_owned() {
+    if entry.a_url != EMPTY_STRING {
         println!("AUrl : {}", entry.a_url);
     }
-    println!("");
+    println!("{EMPTY_STRING}");
     println!("The newest chapter is : {}", newest_chapter);
     println!("Last read chapter was : {}", last_read_chapter);
     println!("It was last updated   : {}", last_updated);
@@ -27,7 +29,7 @@ fn announce_new_chapter(
 }
 
 fn check_and_anounce_chapter(new_releases: &Vec<ReleaseStruct>) {
-    if new_releases.len() > 0 {
+    if !new_releases.is_empty() {
         println!("There are new chapters for:");
         for entry in new_releases {
             announce_new_chapter(

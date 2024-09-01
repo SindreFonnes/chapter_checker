@@ -15,9 +15,12 @@ use crate::{
     structs_and_types::CurrentChapterState,
 };
 
-pub(crate) fn parse_site_len_wrong (arr: &Vec<&str>, error_string: String) -> Result<(), CheckError> {
+pub(crate) fn parse_site_len_wrong(
+    arr: &Vec<&str>,
+    error_string: String,
+) -> Result<(), CheckError> {
     if arr.len() < 2 {
-        return Err(CheckError::Parse(error_string))
+        return Err(CheckError::Parse(error_string));
     }
     Ok(())
 }
@@ -55,20 +58,6 @@ pub(crate) fn filter_non_number_chars_from_string(input: &str) -> String {
 
     text
 }
-
-//const USER_AGENT_LIST: [&str; 3] = [
-//    "Mozilla/5.0 (iPad; CPU OS 12_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
-//    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.83 Safari/537.36",
-//    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.51 Safari/537.36"
-//];
-//
-//fn get_user_agent() -> &'static str {
-//    let mut rng = rand::thread_rng();
-//    let range = Uniform::from(0..3);
-//    let random_index = range.sample(&mut rng);
-//    println!("{}", random_index);
-//    USER_AGENT_LIST[random_index]
-//}
 
 fn add_client_headers(request_builder: RequestBuilder) -> RequestBuilder {
     request_builder
@@ -126,18 +115,17 @@ pub(crate) async fn get_site_as_string(site: &str) -> Result<String, reqwest::Er
         let headers = response.headers();
         let new_url = headers
             .get("location")
-            .expect(format!("Failed to unwrap new url to {}", site).as_str());
+            .unwrap_or_else(|| panic!("Failed to unwrap new url to {}", site));
         println!("{} changed url to {:?}", site, &new_url);
 
-        let new_url = new_url.to_str().expect(
-            format!(
+        let new_url = new_url.to_str().unwrap_or_else(|_| {
+            panic!(
                 "Failed to parse new_url to string for {}, {:?}",
                 site, new_url
             )
-            .as_str(),
-        );
+        });
 
-        let response = match get_site_respone(&new_url).await {
+        let response = match get_site_respone(new_url).await {
             Ok(resp) => resp,
             Err(err) => return Err(err),
         };
@@ -167,28 +155,29 @@ pub async fn check_for_chapter_updates() -> Vec<ReleaseStruct> {
 
     let mut new_releases: Vec<ReleaseStruct> = vec![];
 
-    for site in results {
-        if let Ok((entry, chapter)) = site {
-            let old_entry_state = state.get(&entry.name);
+    for site in results.into_iter().flatten() {
+        let entry = site.0;
+        let chapter = site.1;
 
-            match old_entry_state {
-                Some(previous_state) => {
-                    if previous_state.last_chapter_read < chapter {
-                        new_releases.push(ReleaseStruct {
-                            entry: entry.clone(),
-                            newest_chapter: chapter.clone(),
-                            last_read_chapter: previous_state.last_chapter_read.clone(),
-                            last_updated: previous_state.last_updated.clone(),
-                        })
-                    }
+        let old_entry_state = state.get(&entry.name);
+
+        match old_entry_state {
+            Some(previous_state) => {
+                if previous_state.last_chapter_read < chapter {
+                    new_releases.push(ReleaseStruct {
+                        entry: entry.clone(),
+                        newest_chapter: chapter,
+                        last_read_chapter: previous_state.last_chapter_read,
+                        last_updated: previous_state.last_updated.clone(),
+                    })
                 }
-                None => new_releases.push(ReleaseStruct {
-                    entry: entry.clone(),
-                    newest_chapter: chapter.clone(),
-                    last_read_chapter: 0.0,
-                    last_updated: format!("{}", Utc::now()),
-                }),
             }
+            None => new_releases.push(ReleaseStruct {
+                entry: entry.clone(),
+                newest_chapter: chapter,
+                last_read_chapter: 0.0,
+                last_updated: format!("{}", Utc::now()),
+            }),
         }
     }
 

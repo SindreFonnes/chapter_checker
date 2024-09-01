@@ -174,7 +174,7 @@ pub fn get_current_read_chapter_state() -> HashMap<String, CurrentChapterState> 
             .expect("Couldn't create current_chapter_state file");
 
         state_file
-            .write_all("{}".as_bytes())
+            .write_all("[]".as_bytes())
             .expect("Failed to write to state file");
     }
 
@@ -194,7 +194,7 @@ pub fn get_current_read_chapter_state() -> HashMap<String, CurrentChapterState> 
 }
 
 pub fn update_read_chapter_state(new_releases: &Vec<ReleaseStruct>) {
-    if new_releases.len() == 0 {
+    if new_releases.is_empty() {
         return;
     }
 
