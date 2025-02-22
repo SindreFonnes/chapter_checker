@@ -1,23 +1,12 @@
 [
 	{
 		"type": "MANGA",
-		"name": "The scholar's reincarnation",
-		"a_url": "",
-		"urls": [
-			{
-				"domain": "MANGANATO",
-				"url": "https://chapmanganato.com/manga-vv973156"
-			}
-		]
-	},
-	{
-		"type": "MANGA",
 		"name": "Catastrophic Necromancer",
 		"a_url": "",
 		"urls": [
 			{
-				"domain": "MANGANATO",
-				"url": "https://chapmanganato.to/manga-td996812"
+				"domain": "MANHUAUS",
+				"url": "https://manhuaus.com/manga/disastrous-necromancer/"
 			}
 		]
 	},
@@ -34,60 +23,12 @@
 	},
 	{
 		"type": "MANGA",
-		"name": "The great mage returnas after 4000 years",
-		"a_url": "",
-		"urls": [
-			{
-				"domain": "MANGANATO",
-				"url": "https://chapmanganato.com/manga-hu985229"
-			}
-		]
-	},
-	{
-		"type": "MANGA",
-		"name": "The Executed Sage Is Reincarnated As A Lich And Starts An All-Out War",
-		"a_url": "",
-		"urls": [
-			{
-				"domain": "MANGANATO",
-				"url": "https://chapmanganato.com/manga-if986340"
-			}
-		]
-	},
-	{
-		"type": "MANGA",
-		"name": "Reincarnated as an aristocrat with an appraisal skill",
-		"a_url": "https://manganow.to/manga/reincarnated-as-an-aristocrat-with-an-appraisal-skill",
-		"urls": [
-			{
-				"domain": "MANGANATO",
-				"url": "https://chapmanganato.com/manga-iq985899"
-			}
-		]
-	},
-	{
-		"type": "MANGA",
-		"name": "A returner's magic should be special",
-		"a_url": "",
-		"urls": [
-			{
-				"domain": "MANGANATO",
-				"url": "https://chapmanganato.com/manga-ci980191"
-			}
-		]
-	},
-	{
-		"type": "MANGA",
 		"name": "Ranker who lives a second time",
 		"a_url": "https://w3.secondliferanker.com/",
 		"urls": [
 			{
 				"domain": "MANGANATO",
 				"url": "https://chapmanganato.com/manga-ec981811"
-			},
-			{
-				"domain": "MANHUATOP",
-				"url": "https://manhuatop.org/manhua/ranker-who-lives-a-second-time/"
 			}
 		]
 	},
@@ -97,30 +38,8 @@
 		"a_url": "",
 		"urls": [
 			{
-				"domain": "MANGANATO",
-				"url": "https://chapmanganato.com/manga-hp985172"
-			}
-		]
-	},
-	{
-		"type": "MANGA",
-		"name": "Seoul station's necromancer",
-		"a_url": "",
-		"urls": [
-			{
-				"domain": "MANGANATO",
-				"url": "https://chapmanganato.com/manga-mf989840"
-			}
-		]
-	},
-	{
-		"type": "MANGA",
-		"name": "The only necromancer",
-		"a_url": "",
-		"urls": [
-			{
-				"domain": "MANGANATO",
-				"url": "https://chapmanganato.com/manga-ml989694"
+				"domain": "WEBTOON",
+				"url": "https://www.webtoons.com/en/action/the-strongest-florist/list?title_no=2507"
 			}
 		]
 	},
@@ -130,100 +49,63 @@
 		"a_url": "",
 		"urls": [
 			{
-				"domain": "MANGANATO",
-				"url": "https://chapmanganato.com/manga-nh990916"
+				"domain": "MANGAREADER",
+				"url": "https://mangareader.to/the-exiled-reincarnated-heavy-knight-is-unrivaled-in-game-knowledge-58398"
 			}
 		]
 	},
 	{
 		"type": "MANGA",
 		"name": "Mercenary Enrollment",
-		"a_url": "",
+		"a_url": "https://chapmanganato.com/manga-jz987182",
 		"urls": [
 			{
-				"domain": "MANGANATO",
-				"url": "https://chapmanganato.com/manga-jz987182"
+				"domain": "MANGAREADER",
+				"url": "https://mangareader.to/mercenary-enrollment-56832"
 			}
 		]
 	},
 	{
 		"type": "MANGA",
 		"name": "The hero returns",
-		"a_url": "",
+		"a_url": "https://chapmanganato.com/manga-ni990665",
 		"urls": [
 			{
-				"domain": "MANGANATO",
-				"url": "https://chapmanganato.com/manga-ni990665"
-			},
-			{
-				"domain": "FLAMESCANS",
-				"url": "https://flamescans.org/series/1680170522-hero-returns/"
-			}
-		]
-	},
-	{
-		"type": "MANGA",
-		"name": "The struggle of being reincarnated as the marquess's daughter",
-		"a_url": "",
-		"urls": [
-			{
-				"domain": "MANGANATO",
-				"url": "https://chapmanganato.to/manga-le988539"
+				"domain": "MANGAREADER",
+				"url": "https://mangareader.to/hero-returns-58188"
 			}
 		]
 	},
 	{
 		"type": "MANGA",
 		"name": "Academy's undercover professor",
-		"a_url": "https://www.asura.nacm.xyz/manga/1672760368-academys-undercover-professor/",
+		"a_url": "",
 		"urls": [
 			{
-				"domain": "MANGANATO",
-				"url": "https://chapmanganato.com/manga-nk991067"
+				"domain": "MANGAREADER",
+				"url": "https://mangareader.to/academys-undercover-professor-59670"
 			}
 		]
 	},
 	{
 		"type": "MANGA",
 		"name": "I Reincarnated As The Crazed Heir",
-		"a_url": "",
+		"a_url": "https://chapmanganato.com/manga-mw989505",
 		"urls": [
 			{
-				"domain": "MANGANATO",
-				"url": "https://chapmanganato.com/manga-mw989505"
+				"domain": "MANGAREADER",
+				"url": "https://mangareader.to/i-reincarnated-as-the-crazed-heir-57118"
 			}
 		]
 	},
 	{
 		"type": "MANGA",
 		"name": "Max level hero has returned!",
-		"a_url": "",
+		"a_url": "https://chapmanganato.com/manga-je987087",
 		"urls": [
 			{
-				"domain": "MANGANATO",
-				"url": "https://chapmanganato.com/manga-je987087"
-			}
-		]
-	},
-	{
-		"type": "MANGA",
-		"name": "My School Life Pretending To Be a Worthless Person",
-		"a_url": "",
-		"urls": [
-			{
-				"domain": "MANGANATO",
-				"url": "https://chapmanganato.com/manga-os992027"
-			}
-		]
-	},
-	{
-		"type": "MANGA",
-		"name": "Solo leveling",
-		"a_url": "",
-		"urls": [
-			{
-				"domain": "MANGANATO",
-				"url": "https://chapmanganato.com/manga-dr980474"
+				"domain": "MANGAREADER",
+				"url": "https://mangareader.to/the-max-level-hero-strikes-back-56188"
 			}
 		]
 	},
@@ -233,8 +115,8 @@
 		"a_url": "",
 		"urls": [
 			{
-				"domain": "MANGANATO",
-				"url": "https://chapmanganato.com/manga-ly989281"
+				"domain": "WEBTOON",
+				"url": "https://www.webtoons.com/en/fantasy/66666-years-advent-of-the-dark-mage/list?title_no=3441"
 			}
 		]
 	},
@@ -244,30 +126,19 @@
 		"a_url": "",
 		"urls": [
 			{
-				"domain": "MANGANATO",
-				"url": "https://chapmanganato.com/manga-om992321"
-			}
-		]
-	},
-	{
-		"type": "MANGA",
-		"name": "Damn reincarnation",
-		"a_url": "",
-		"urls": [
-			{
-				"domain": "MANGANATO",
-				"url": "https://chapmanganato.com/manga-ny991333"
+				"domain": "MANHUAUS",
+				"url": "https://manhuaus.com/manga/return-of-the-sss-class-ranker/"
 			}
 		]
 	},
 	{
 		"type": "MANGA",
 		"name": "Reincarnation of the Murim clans former ranker",
-		"a_url": "",
+		"a_url": "https://chapmanganato.to/manga-ms990101",
 		"urls": [
 			{
-				"domain": "MANGANATO",
-				"url": "https://chapmanganato.to/manga-ms990101"
+				"domain": "MANGAREADER",
+				"url": "https://mangareader.to/reincarnation-of-the-murim-clans-former-ranker-62590"
 			}
 		]
 	},
@@ -277,19 +148,8 @@
 		"a_url": "",
 		"urls": [
 			{
-				"domain": "MANGANATO",
-				"url": "https://chapmanganato.to/manga-qo993523"
-			}
-		]
-	},
-	{
-		"type": "MANGA",
-		"name": "Jujutsu kaisen",
-		"a_url": "https://w9.jujmanga.com/",
-		"urls": [
-			{
-				"domain": "MANGANATO",
-				"url": "https://chapmanganato.com/manga-ba979135"
+				"domain": "MANHUAUS",
+				"url": "https://manhuaus.com/manga/i-used-to-be-a-boss/"
 			}
 		]
 	},
@@ -299,8 +159,8 @@
 		"a_url": "",
 		"urls": [
 			{
-				"domain": "MANGANATO",
-				"url": "https://manganato.com/manga-uh998064"
+				"domain": "MANHUAUS",
+				"url": "https://manhuaus.com/manga/i-became-an-evolving-space-monster/"
 			}
 		]
 	},
@@ -323,6 +183,17 @@
 			{
 				"domain": "MANGANATO",
 				"url": "https://chapmanganato.to/manga-qk993819"
+			}
+		]
+	},
+	{
+		"type": "MANGA",
+		"name": "Conqueror from a dying kingdom",
+		"a_url": "",
+		"urls": [
+			{
+				"domain": "MANGAREADER",
+				"url": "https://mangareader.to/conqueror-of-dying-kingdom-58906"
 			}
 		]
 	}

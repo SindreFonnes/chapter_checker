@@ -2,8 +2,10 @@ mod asura;
 mod flamescans;
 mod lnreader;
 mod manganato;
-mod manhuatop;
+mod mangareader;
+mod manhuanaus;
 mod manhwafreak;
+mod webtoon;
 mod wuxiax;
 
 use core::fmt;
@@ -40,11 +42,20 @@ async fn site_handler(site: &Site) -> Result<f32, CheckError> {
             SiteDomain::Flamescans => flamescans::check(site_text, site.url.clone()),
             SiteDomain::Lnreader => lnreader::check(site_text, site.url.clone()),
             SiteDomain::Manhwafreak => manhwafreak::check(site_text, site.url.clone()),
-            SiteDomain::Manhuatop => {
-                Err(CheckError::Parse("Manhuatop not implemented".to_string()))
-            }
+            SiteDomain::Manhuaus => manhuanaus::check(site_text, site.url.clone()),
+            SiteDomain::Webtoon => webtoon::check(site_text, site.url.clone()),
+            SiteDomain::Mangareader => mangareader::check(site_text, site.url.clone()),
         }
-    }?;
+    };
+
+    let parsed_text = match parsed_text {
+        Ok(chapter) => chapter,
+        Err(err) => {
+            println!("Error parsing site: {}", site.url);
+            println!("{:?}", err);
+            return Err(err);
+        }
+    };
 
     Ok(parsed_text)
 }

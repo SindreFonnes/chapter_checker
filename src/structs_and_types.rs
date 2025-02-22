@@ -9,7 +9,9 @@ pub enum SiteDomain {
     Flamescans,
     Lnreader,
     Manhwafreak,
-    Manhuatop,
+    Manhuaus,
+    Webtoon,
+    Mangareader,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
