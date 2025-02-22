@@ -5,7 +5,7 @@ use std::collections::HashMap;
 use std::fs::{create_dir_all, read_to_string, remove_file, write};
 use std::io::Write;
 
-fn get_init_entries() -> Vec<Entry> {
+pub fn get_init_entries() -> Vec<Entry> {
     let text = include_str!("../data/data.json");
     let entries = from_str(text).unwrap();
     entries

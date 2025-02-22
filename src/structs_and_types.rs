@@ -9,6 +9,7 @@ pub enum SiteDomain {
     Flamescans,
     Lnreader,
     Manhwafreak,
+    Manhuatop,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]

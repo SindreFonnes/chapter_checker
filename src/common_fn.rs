@@ -8,6 +8,7 @@ use reqwest::{RequestBuilder, Response};
 
 use crate::data::{
     change_a_site_url_state, get_current_read_chapter_state, get_current_site_url_state,
+    get_init_entries,
 };
 use crate::structs_and_types::{Entry, ReleaseStruct};
 use crate::{
@@ -86,7 +87,7 @@ async fn get_site_respone(site: &str) -> Result<Response, reqwest::Error> {
     let response = match match add_client_headers(client.get(site)).send().await {
         Ok(resp) => resp,
         Err(err) => {
-            println!("Error for site: {}", site);
+            println!("\nError for site: {}", site);
             println!("{:?}", err);
             return Err(err);
         }
@@ -95,7 +96,7 @@ async fn get_site_respone(site: &str) -> Result<Response, reqwest::Error> {
     {
         Ok(resp) => resp,
         Err(err) => {
-            println!("Error for site: {}", site);
+            println!("\nError status for site: {}", site);
             println!("{:?}", err);
             return Err(err);
         }
@@ -139,7 +140,15 @@ pub(crate) async fn get_site_as_string(site: &str) -> Result<String, reqwest::Er
 }
 
 fn get_entries() -> Vec<Entry> {
-    let state = get_current_site_url_state();
+    let state = {
+        let mut result: HashMap<String, Entry> = HashMap::new();
+        for entry in get_init_entries() {
+            let key = entry.name.clone();
+            result.insert(key, entry);
+        }
+        result
+    };
+
     state.into_values().collect()
 }
 

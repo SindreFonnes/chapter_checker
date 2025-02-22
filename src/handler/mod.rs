@@ -2,6 +2,7 @@ mod asura;
 mod flamescans;
 mod lnreader;
 mod manganato;
+mod manhuatop;
 mod manhwafreak;
 mod wuxiax;
 
@@ -39,6 +40,9 @@ async fn site_handler(site: &Site) -> Result<f32, CheckError> {
             SiteDomain::Flamescans => flamescans::check(site_text, site.url.clone()),
             SiteDomain::Lnreader => lnreader::check(site_text, site.url.clone()),
             SiteDomain::Manhwafreak => manhwafreak::check(site_text, site.url.clone()),
+            SiteDomain::Manhuatop => {
+                Err(CheckError::Parse("Manhuatop not implemented".to_string()))
+            }
         }
     }?;
 

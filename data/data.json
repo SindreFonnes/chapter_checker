@@ -84,6 +84,10 @@
 			{
 				"domain": "MANGANATO",
 				"url": "https://chapmanganato.com/manga-ec981811"
+			},
+			{
+				"domain": "MANHUATOP",
+				"url": "https://manhuatop.org/manhua/ranker-who-lives-a-second-time/"
 			}
 		]
 	},
@@ -95,17 +99,6 @@
 			{
 				"domain": "MANGANATO",
 				"url": "https://chapmanganato.com/manga-hp985172"
-			}
-		]
-	},
-	{
-		"type": "MANGA",
-		"name": "Story of a low ranked soldier becoming a monarch",
-		"a_url": "https://chapmanganato.com/manga-mg989389",
-		"urls": [
-			{
-				"domain": "MANHWAFREAK",
-				"url": "https://manhwafreak.com/manga/the-story-of-a-low-rank-soldier-beco1ming-a-monarch/"
 			}
 		]
 	},
@@ -264,21 +257,6 @@
 			{
 				"domain": "MANGANATO",
 				"url": "https://chapmanganato.com/manga-ny991333"
-			}
-		]
-	},
-	{
-		"type": "LIGHT_NOVEL",
-		"name": "Academy's Undercover Professor Light Novel",
-		"a_url": "",
-		"urls": [
-			{
-				"domain": "WUXIAX",
-				"url": "https://www.wuxiax.com/novel/academys-undercover-professor.html"
-			},
-			{
-				"domain": "LNREADER",
-				"url": "https://lnreader.org/academys-undercover-professor-937462"
 			}
 		]
 	},
