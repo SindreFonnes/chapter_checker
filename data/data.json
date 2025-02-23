@@ -218,5 +218,16 @@
 				"url": "https://manhuaus.com/manga/otherworldly-skeleton-evolution/"
 			}
 		]
+	},
+	{
+		"type": "MANGA",
+		"name": "The Rebirth of the Her's Party's Archmage",
+		"a_url": "",
+		"urls": [
+			{
+				"domain": "MANHUAUS",
+				"url": "https://manhuaus.com/manga/the-rebirth-of-the-heros-partys-archmage/"
+			}
+		]
 	}
 ]
