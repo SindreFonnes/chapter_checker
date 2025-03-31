@@ -32,7 +32,7 @@ impl fmt::Display for CheckError {
 async fn site_handler(site: &Site) -> Result<f32, CheckError> {
     let site_text = get_site_as_string(&site.url)
         .await
-        .map_err(|err| CheckError::Request(err))?;
+        .map_err(CheckError::Request)?;
 
     let parsed_text = {
         match site.domain {
@@ -69,11 +69,9 @@ pub async fn handle(entry: &Entry) -> Result<(Entry, f32), CheckError> {
             .collect()
             .await;
 
-    for result in fetched_entries {
-        if let Ok(chapter) = result {
-            if highest_chapter_found < chapter {
-                highest_chapter_found = chapter;
-            }
+    for chapter in fetched_entries.into_iter().filter_map(Result::ok) {
+        if highest_chapter_found < chapter {
+            highest_chapter_found = chapter;
         }
     }
 

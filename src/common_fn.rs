@@ -62,46 +62,32 @@ pub(crate) fn filter_non_number_chars_from_string(input: &str) -> String {
 
 fn add_client_headers(request_builder: RequestBuilder) -> RequestBuilder {
     request_builder
-        .header(
-            "User-Agent",
-            "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv,98.0) Gecko/20100101 Firefox/98.0",
-        )
-        .header(
-            "Accept",
-            "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
-        )
-        .header("Accept-Language", "en-US,en;q=0.5")
-        .header("Connection", "keep-alive")
-        .header("Upgrade-Insecure-Requests", "1")
-        .header("Sec-Fetch-Dest", "document")
-        .header("Sec-Fetch-Mode", "navigate")
-        .header("Sec-Fetch-Site", "none")
-        .header("Sec-Fetch-User", "?1")
-        .header("Cache-Control", "max-age=0")
-        .header("Accept-Encoding", "gzip, deflate")
+        .header("User-Agent", "curl/8.5.0")
+        .header("Accept", "*/*")
 }
 
 async fn get_site_respone(site: &str) -> Result<Response, reqwest::Error> {
     let client = reqwest::Client::new();
 
-    let response = match match add_client_headers(client.get(site)).send().await {
+    let builder = client.get(site); // add_client_headers(client.get(site));
+
+    let response = match builder.send().await {
         Ok(resp) => resp,
         Err(err) => {
             println!("\nError for site: {}", site);
             println!("{:?}", err);
             return Err(err);
         }
-    }
-    .error_for_status()
-    {
-        Ok(resp) => resp,
+    };
+
+    match response.error_for_status() {
+        Ok(resp) => Ok(resp),
         Err(err) => {
             println!("\nError status for site: {}", site);
             println!("{:?}", err);
-            return Err(err);
+            Err(err)
         }
-    };
-    Ok(response)
+    }
 }
 
 pub(crate) async fn get_site_as_string(site: &str) -> Result<String, reqwest::Error> {

@@ -12,28 +12,6 @@
 	},
 	{
 		"type": "MANGA",
-		"name": "The dungeon master",
-		"a_url": "",
-		"urls": [
-			{
-				"domain": "MANGANATO",
-				"url": "https://chapmanganato.com/manga-ds980601"
-			}
-		]
-	},
-	{
-		"type": "MANGA",
-		"name": "Ranker who lives a second time",
-		"a_url": "https://w3.secondliferanker.com/",
-		"urls": [
-			{
-				"domain": "MANGANATO",
-				"url": "https://chapmanganato.com/manga-ec981811"
-			}
-		]
-	},
-	{
-		"type": "MANGA",
 		"name": "The strongest Florist",
 		"a_url": "",
 		"urls": [
@@ -57,7 +35,7 @@
 	{
 		"type": "MANGA",
 		"name": "Mercenary Enrollment",
-		"a_url": "https://chapmanganato.com/manga-jz987182",
+		"a_url": "",
 		"urls": [
 			{
 				"domain": "MANGAREADER",
@@ -68,7 +46,7 @@
 	{
 		"type": "MANGA",
 		"name": "The hero returns",
-		"a_url": "https://chapmanganato.com/manga-ni990665",
+		"a_url": "",
 		"urls": [
 			{
 				"domain": "MANGAREADER",
@@ -90,7 +68,7 @@
 	{
 		"type": "MANGA",
 		"name": "I Reincarnated As The Crazed Heir",
-		"a_url": "https://chapmanganato.com/manga-mw989505",
+		"a_url": "",
 		"urls": [
 			{
 				"domain": "MANGAREADER",
@@ -101,7 +79,7 @@
 	{
 		"type": "MANGA",
 		"name": "Max level hero has returned!",
-		"a_url": "https://chapmanganato.com/manga-je987087",
+		"a_url": "",
 		"urls": [
 			{
 				"domain": "MANGAREADER",
@@ -134,7 +112,7 @@
 	{
 		"type": "MANGA",
 		"name": "Reincarnation of the Murim clans former ranker",
-		"a_url": "https://chapmanganato.to/manga-ms990101",
+		"a_url": "",
 		"urls": [
 			{
 				"domain": "MANGAREADER",
@@ -161,28 +139,6 @@
 			{
 				"domain": "MANHUAUS",
 				"url": "https://manhuaus.com/manga/i-became-an-evolving-space-monster/"
-			}
-		]
-	},
-	{
-		"type": "MANGA",
-		"name": "Kingdom",
-		"a_url": "",
-		"urls": [
-			{
-				"domain": "MANGANATO",
-				"url": "https://chapmanganato.to/manga-qi951517"
-			}
-		]
-	},
-	{
-		"type": "MANGA",
-		"name": "The Versatile Butler Who Served A Selfish Princess Will Become A Peerless Upstart Soldier In The Neighbouring Empire",
-		"a_url": "",
-		"urls": [
-			{
-				"domain": "MANGANATO",
-				"url": "https://chapmanganato.to/manga-qk993819"
 			}
 		]
 	},
